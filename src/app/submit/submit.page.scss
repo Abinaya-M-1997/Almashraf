@@ -1,0 +1,142 @@
+ion-title{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: -6%;
+}
+
+.maincontent{
+    position: absolute;
+    margin: auto 10px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 250px;
+    background-color: #115cad;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.maincontent h4{
+    color:white;
+    text-align: justify;
+    padding: 0% 4%;
+}
+
+ion-col{
+    color:white;
+    font-size:18px;
+}
+.maincontent .amount{
+    color:#7FFF00;
+    text-align: right;
+}
+
+.loanContent{
+    text-align:left;
+    width:90%;
+    margin-left: 5%;
+    padding-top: 5%;
+}
+
+.submitPage ion-col{
+    margin: 0px;
+}
+.submitPage ion-col ion-card{
+background-color: #FFF;
+padding: 6px;
+margin: auto;
+border-radius: 20px;
+//box-shadow: 0px 2px 24px #888;
+    }
+        .submitPage ion-col ion-card p{
+            color: #1b3280;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .submitPage ion-col ion-card ion-icon img{
+    width: 70px;
+    height: 70px;
+}
+.shadowgreen{
+    box-shadow: 0px 2px 12px green !important;
+}
+.shadowred{
+    box-shadow: 0px 2px 12px red;
+
+}
+.submithead{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
+    background-color: #ef1d28;
+    box-shadow: 0px 2px 12px red;
+}
+.margtop{
+    margin-top: 10px;
+}
+.sub-first-blk{
+   width: 100%;
+   text-align: center;
+   position:  relative;
+   top: 55%;
+   //right: 27%;
+}
+.sub-img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 3px solid;
+    float: left;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 0;
+}
+// .bgsub{
+//     background-image: url('../assets/imgs/Blu.jpg');border-radius: 10px;
+// }
+
+
+// .dummy-bg{
+//     background-image: url('assets/imgs/images.jpg');
+// }
+
+.setWhite{
+    color: white;
+}
+.setRed{
+    color:#f53d3d;
+}
+
+.divstyle
+{
+     background-color: rgba(0,0,0, 0.4);
+     color: white;
+     font-weight: bold;
+     border: 3px solid #f1f1f1;
+     position: absolute;
+     left: 50%;
+     transform: translate(-47%, -70%);
+     z-index: 2;
+     width: 100%;
+     text-align: center;
+}
+
+.applicantName
+{
+    font-size: 15px;
+    margin-top: 30px;
+    margin-left: 1px;
+    float:left;
+}
+
+.blurimg
+{
+    width: 100%;
+    height: 100px;
+    filter: blur(20px);
+    -webkit-filter: blur(20px);
+}

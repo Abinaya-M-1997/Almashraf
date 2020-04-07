@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="headpart">
+    <ion-title color="white">Submit Application</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div style="position: relative">
+    <div><img src="{{ApplicantImg}}" class="blurimg"></div>
+    <div class="divstyle">
+      <div class="sub-first-blk">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+                <img class="sub-img" src="{{ApplicantImg}}" >
+            </ion-col>
+            <ion-col size="9" class="ion-padding-start">
+                <div class="applicantName">
+                  <ion-icon ios="ios-person" md="md-person" style="padding-right: 5px;"></ion-icon> 
+                  {{ApplicantName}}
+                </div>
+                <div *ngIf="AppReferenceNo!=''" style="margin-left: 1px;float:left">
+                  <ion-icon name="checkmark-circle-outline" style="padding-right: 5px;" *ngIf="!submitedShow"></ion-icon>
+                  <ion-icon style="padding-right: 5px;"  name="done-all" *ngIf="submitedShow"></ion-icon>
+                   {{AppReferenceNo}}
+                </div>        
+            </ion-col>
+          </ion-row>
+        </ion-grid>      
+      </div>
+    </div>
+
+    <div style="margin-top: 70px;border: 2px solid #313679;border-radius: 5px;padding: 2px;">
+                   
+        <div style="background-color:#ccc;border-radius: 5px;margin: 3px;margin-top: -18px;">
+       <p style="font-size: 22px;padding-left: 12px;padding-top: 12px;color: black"><span style="color: white;"> *</span> Loan Amount</p>
+        <p style="color: white;font-size: 26px;padding: 0px;margin-top: -10px;padding: 7px;margin-left: 9px;"><b> {{lnAmountShow | currency:'INR'}}</b></p>
+      </div>
+      <ion-row style="margin-top: -17px;">
+        <ion-col>
+          
+        <div style="background-color: #313679;border-radius: 5px;margin-top: -28px;">
+        <p style="font-size: 22px;padding-left: 12px;color:#ccc;padding: 6px;padding-left: 9px;">Net Take Home Pay</p>
+        <p style="font-size: 26px;margin-top: -20px;padding-left: 7px;" #nthp><b>{{NTHA}} %</b></p>
+      </div>
+
+        </ion-col>
+        <ion-col style="margin-left: -7px">
+      <div style="background-color: #313679;border-radius: 5px;margin-top: -28px;">
+        <p style="font-size: 22px;padding-left: 12px;padding-top: 12px;color: #ccc">EMI</p>
+        <p style="color: white;font-size: 26px;padding: 0px;margin-top: -8px;padding: 7px;"><b>{{loan_EMI | currency:'INR'}}</b></p>
+      </div>
+        </ion-col>
+      </ion-row>
+       <span style="font-size: small;padding-left: 7px;color: #313679">* In-principal sanction subject to terms and conditions </span>
+      
+    </div>
+
+    <p style="text-align: center;padding:5%;">
+      <ion-row *ngIf="!submitedShow">
+        <ion-col *ngIf="AppReferenceNo==''">
+          <ion-button class="button_proceed" (click)="proceedSubmit()" shape="round"  color="orangepart">Submit</ion-button>
+        </ion-col>
+        <ion-col *ngIf="AppReferenceNo!=''">
+          <ion-button class="button_proceed" (click)="docAttachCall()" shape="round"  color="orangepart">Submit Documents</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="submitedShow">
+        <ion-col>
+          <ion-button class="button_proceed"  shape="round"  color="orangepart">Application Submited</ion-button>
+        </ion-col>
+      </ion-row>
+    
+  </p>
+
+  </div>
+
+
+</ion-content>

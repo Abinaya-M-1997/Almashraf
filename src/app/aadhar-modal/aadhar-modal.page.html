@@ -1,0 +1,47 @@
+<ion-content class="ion-padding">
+
+    <div class="content">
+  
+        <div class="ion-align-items-center ion-justify-content-center" style="background:rgba(0,0,0,0.5);border-radius: 5px;margin-top:5%;">
+        <div style="text-align: center;">
+          <ion-slides #Slides *ngIf="!docAadharImg">
+            <ion-slide>
+              <img src="assets/imgs/noImgs.png" class="takeaadhar" />
+            </ion-slide>
+          </ion-slides>
+          <ion-slides *ngIf="docAadharImg" pager>
+            <ion-slide *ngFor="let addAadharImgDoc of addAadharImgDocs">
+              <p class="aadharimgdelete">
+                <ion-icon name="trash" (click)="aadharImgRemove(addAadharImgDoc)"></ion-icon>
+              </p>
+              <img src="{{addAadharImgDoc.url}}" class="takeaadhar" />
+            </ion-slide>
+  
+          </ion-slides>
+  
+        </div>
+  
+        <div class="iconpart">
+          <ion-grid color="headpart">
+  
+            <ion-row class="iconlist">
+              <ion-col size="4">
+                <ion-icon (click)="closeAadharModal()" ios="ios-close-circle" md="md-close-circle"></ion-icon>
+              </ion-col>
+  
+              <ion-col (click)="takeAadharImg()">
+                <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+              </ion-col>
+  
+              <!-- <ion-col (click)="openAadharGallery()">
+                <ion-icon ios="ios-folder" md="md-folder"></ion-icon>
+              </ion-col> -->
+            </ion-row>
+  
+          </ion-grid>
+        </div>
+      </div>
+  
+    </div>
+  
+  </ion-content>

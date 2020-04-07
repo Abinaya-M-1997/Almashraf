@@ -1,0 +1,46 @@
+<ion-content class="ion-padding">
+  <div class="content">
+
+    <div class="ion-align-items-center ion-justify-content-center" style="background:rgba(0,0,0,0.5);border-radius: 5px;margin-top:5%;">
+      <div style="text-align: center;">
+        <ion-slides #mySlides *ngIf="!docImg">
+          <ion-slide>
+            <img src="assets/imgs/noImgs.png" class="proofModal" />
+          </ion-slide>
+        </ion-slides>
+        <ion-slides *ngIf="docImg" pager>
+          <ion-slide *ngFor="let addProofDoc of addProofDocs">
+            <p class="imgdelete">
+              <ion-icon name="trash" (click)="proofImgRemove(addProofDoc)"></ion-icon>
+            </p>
+            <img src="{{addProofDoc.url}}" class="proofModal" />
+          </ion-slide>
+
+        </ion-slides>
+
+      </div>
+
+      <div class="iconpart">
+        <ion-grid color="headpart">
+
+          <ion-row class="iconlist">
+            <ion-col>
+              <ion-icon (click)="closeProofModal()" ios="ios-close-circle" md="md-close-circle"></ion-icon>
+            </ion-col>
+
+            <ion-col (click)="takeProofImg()">
+              <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+            </ion-col>
+
+           <!--  <ion-col (click)="openProofGallery()">
+              <ion-icon ios="ios-folder" md="md-folder"></ion-icon>
+            </ion-col> -->
+          </ion-row>
+
+        </ion-grid>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

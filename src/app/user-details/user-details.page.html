@@ -1,0 +1,2211 @@
+<ion-header>
+  <ion-toolbar color="headpart">
+
+    <ion-buttons slot="start" style="position: absolute;">
+      <ion-menu-button color="white" style="zoom:1.2;" autoHide="true"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>{{typetitle}}
+      <!-- <span (click)="viewuserapplicant(userinfo)" class="navCircle">
+        <ion-icon name="ios-person-outline" *ngIf="viewdata"></ion-icon>
+      </span> -->
+      <span (click)="takepic()" *ngIf="!profImg && !base64Image">
+        <img src="assets/imgs/profile.png" class="navuserimg">
+      </span>
+      <span (click)="takepic()" *ngIf="profImg && base64Image">
+        <img [src]="base64Image" class="navuserimg">
+      </span>
+    </ion-title>
+  </ion-toolbar>
+
+  <div class="segment">
+    <ion-toolbar no-border-top no-border-bottom color="headpart" class="margt">
+      <ion-segment [(ngModel)]="userdetail" (ionChange)="onSegmentChanged($event)" class='segmenttab'>
+        <ion-segment-button value="userinfo">
+          <div *ngIf="personaltik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"></ion-icon>
+            </span>
+            <ion-icon ios="ios-person" md="md-person" class="segicon" color="white"></ion-icon>
+            <span class="segtext"> Personal
+              <br /> Details</span>
+          </div>
+          <div *ngIf="!personaltik">
+            <ion-icon ios="ios-person" md="md-person" class="segicon" color="white" color="white"></ion-icon>
+            <span class="segtext"> Personal
+              <br /> Details</span>
+          </div>
+        </ion-segment-button>
+        <!-- <ion-segment-button value="income" (click)="pushToArray()">
+          <div *ngIf="incometik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"></ion-icon>
+            </span>
+            <ion-icon class="segicon" color="white" color="white">₹</ion-icon>
+            <span class="segtext"> Income
+              <br/> Details</span>
+          </div>
+          <div *ngIf="!incometik">
+            <ion-icon class="segicon" color="white" color="white">₹</ion-icon>
+            <span class="segtext"> Income
+              <br/> Details</span>
+          </div>
+        </ion-segment-button> -->
+        <ion-segment-button value="loan" *ngIf="sigshow">
+          <div *ngIf="loantik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"
+                style="margin-left: 10px;margin-top:1px;"></ion-icon>
+            </span>
+
+            <div>
+              <img src="../../assets/imgs/loanwhite.png" class="loansegment" />
+            </div>
+
+            <span class="segtext"> Loan
+              <br /> Details</span>
+          </div>
+          <div *ngIf="!loantik">
+
+            <div><img src="../../assets/imgs/loanwhite.png" class="loansegment" /></div>
+
+            <span class="segtext"> Loan
+              <br /> Details</span>
+          </div>
+        </ion-segment-button>
+        <ion-segment-button value="kyc">
+          <div *ngIf="kyctik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"></ion-icon>
+            </span>
+            <ion-icon ios="ios-document" md="md-document" class="segicon" color="white"></ion-icon>
+            <span class="segtext"> KYC
+              <br /> Details</span>
+          </div>
+          <div *ngIf="!kyctik">
+            <ion-icon ios="ios-document" md="md-document" class="segicon" color="white"></ion-icon>
+            <span class="segtext"> KYC
+              <br /> Details</span>
+          </div>
+        </ion-segment-button>
+        <ion-segment-button value="expences">
+          <div *ngIf="otherdoctik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"></ion-icon>
+            </span>
+            <ion-icon ios="ios-paper" md="md-paper" class="segicon" color="white"></ion-icon>
+            <span class="segtext"> Other
+              <br /> Documents</span>
+          </div>
+          <div *ngIf="!otherdoctik">
+            <ion-icon ios="ios-paper" md="md-paper" class="segicon" color="white"></ion-icon>
+            <span class="segtext"> Other
+              <br /> Documents</span>
+          </div>
+        </ion-segment-button>
+
+        <ion-segment-button value="income" (click)="pushToArray()">
+          <div *ngIf="incometik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"
+                style="margin-left:10px;margin-top:9px;">
+              </ion-icon>
+            </span>
+            <div class="segicon" style="color: white;font-size: 2rem;">&#1583;&#1573;</div>
+            <span class="segtext"> Income
+              <br /> Details</span>
+          </div>
+          <div *ngIf="!incometik">
+            <div class="segicon" style="color: white;">&#1583;&#1573;</div>
+            <span class="segtext"> Income
+              <br /> Details</span>
+          </div>
+        </ion-segment-button>
+
+        <ion-segment-button value="eligibility">
+          <div *ngIf="eligibilitytik">
+            <span>
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="greentik"></ion-icon>
+            </span>
+            <ion-icon class="segicon" color="white" name="checkbox-outline" color="white"></ion-icon>
+            <span class="segtext"> Eligibility
+              <br /> Deviation</span>
+          </div>
+          <div *ngIf="!eligibilitytik">
+            <ion-icon class="segicon" color="white" name="checkbox-outline" color="white"></ion-icon>
+            <span class="segtext"> Eligibility
+              <br /> Deviation</span>
+          </div>
+        </ion-segment-button>
+
+        <!--  <ion-segment-button value="360">
+          <ion-icon ios="ios-information-circle" md="md-information-circle" class="segicon" color="white"></ion-icon>
+          <span class="segtext">360°
+            <br/> View</span>
+        </ion-segment-button> -->
+      </ion-segment>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="userdetail">
+    <ion-slides #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+      <ion-slide>
+        <div *ngSwitchCase="'userinfo'" style="width:100%; padding:10px;">
+          <h2 class="headtitel">Personal Details</h2>
+          <form [formGroup]="personalDetails" (ngSubmit)="personalsave(personalDetails.value)">
+            <!--             <ion-item>
+              <ion-label position="floating">Text</ion-label>
+              <ion-input type="text" (keypress)="alphavalidation(event)" ng-pattern="/^([0-9])?$/"></ion-input>
+            </ion-item>
+ -->
+            <ion-row>
+              <ion-col size="3">
+                <ion-item>
+                  <ion-label position="floating">Title
+                    <span class="mandatory">*</span>
+                  </ion-label>
+                  <ion-select interface="popover" formControlName="title" [disabled]="disableScope"
+                    (ionChange)="slectGender()">
+                    <ion-select-option *ngFor="let titleval of GlobalTitleList" [value]="titleval.llvOptionVal">
+                      {{titleval.llvOptionDesc}}</ion-select-option>
+
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+              <ion-col size="9">
+                <ion-item>
+                  <ion-label position="floating">First Name
+                    <span class="mandatory">*</span>
+                  </ion-label>
+                  <ion-input formControlName="firstName" type="text" [disabled]="disableScope"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <span class="error"
+              *ngIf="personalDetails.get('firstName').hasError('required') && (personalDetails.get('firstName').touched || personalDetails.get('firstName').dirty)">
+              <span class="errText">Enter First Name.</span>
+            </span>
+            <span class="error"
+              *ngIf="personalDetails.get('firstName').hasError('pattern') && (personalDetails.get('firstName').touched || personalDetails.get('firstName').dirty)">
+              <span class="errText">Enter Valid First Name.</span>
+            </span>
+            <ion-item>
+              <ion-label position="floating">Middle Name
+                <!-- <span class="mandatory">*</span> -->
+              </ion-label>
+              <ion-input formControlName="middleName" type="text" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="personalDetails.get('middleName').hasError('pattern') && (personalDetails.get('middleName').touched || personalDetails.get('middleName').dirty)">
+              <span class="errText">Enter Valid Middle Name.</span>
+            </span>
+            <ion-item>
+
+              <ion-label position="floating">Last Name
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="lastName" type="text" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="personalDetails.get('lastName').hasError('required') && (personalDetails.get('lastName').touched || personalDetails.get('lastName').dirty)">
+              <span class="errText">Enter Last Name.</span>
+            </span>
+            <span class="error"
+              *ngIf="personalDetails.get('lastName').hasError('pattern') && (personalDetails.get('lastName').touched || personalDetails.get('lastName').dirty)">
+              <span class="errText">Enter Valid Last Name.</span>
+            </span>
+
+            <ion-item lines="none">
+              <ion-label class="genderLabel">Gender
+                <span class="mandatory">*</span>
+              </ion-label>
+            </ion-item>
+            <div class="segment2">
+              <ion-segment [(ngModel)]="genderSelect" (ionChange)="genderChng()" formControlName="gender"
+                [disabled]="disableScope">
+                <ion-segment-button value="M" class="genMale">Male</ion-segment-button>
+                <ion-segment-button value="F" class="genFem">Female</ion-segment-button>
+                <ion-segment-button value="N" class="genOth">Others</ion-segment-button>
+              </ion-segment>
+            </div>
+
+            <!--              <ion-select interface="action-sheet" formControlName="gender">
+                <ion-option *ngFor="let gender of genderInfo" value="{{gender.genderName}}">{{gender.genderName}}</ion-option>
+              </ion-select>
+-->
+            <span
+              *ngIf="personalDetails.get('gender').hasError('required') && (personalDetails.get('gender').touched || personalDetails.get('gender').dirty)">
+              <span class="errText">Must select Gender.</span>
+            </span>
+
+
+            <!--            <ion-item>
+              <ion-label floating>Gender
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="gender" #select>
+                <ion-option *ngFor="let gender of genderInfo" value="{{gender.genderName}}">{{gender.genderName}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <span *ngIf="!personalDetails.controls.gender.valid && (personalDetails.controls.gender.dirty || personalDetails.controls.gender.touched)"><span class="errText">Must select Gender.</span></span>
+-->
+            <!--            <ion-list radio-group formControlName="gender">
+              <ion-row class="radiobuttondesign">
+                <ion-col *ngFor="let gender of genderInfo; let i = index;">
+                  <ion-item no-lines>
+                    <ion-label>{{gender.genderName}}</ion-label>
+                    <ion-radio [value]="gender.genderName" [checked]="i==0"></ion-radio>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+              <span *ngIf="!personalDetails.controls.gender.valid && (personalDetails.controls.gender.dirty || personalDetails.controls.gender.touched)"><span class="errText">Must select Gender.</span></span>
+            </ion-list>-->
+
+            <div class="newdate">
+              <ion-item>
+                <ion-label position="floating">D.O.B
+                  <span class="mandatory">*</span>
+                </ion-label>
+                <ion-input type="date" formControlName="dob" min="1900-01-01" [max]="getToday()"
+                  displayFormat="DD/MM/YYYY" [disabled]="disableScope"></ion-input>
+                <!-- <ion-datetime type="date" formControlName="dob" displayFormat="MM/DD/YYYY"></ion-datetime> -->
+                <!-- <ion-datetime min="1900" max="1999" displayFormat="DD/MM/YYYY" id="dob" formControlName="dob" name="dob" [(ngModel)]="user.dob"
+        (ionChange)="CheckDate(user.dob)"></ion-datetime> -->
+              </ion-item>
+            </div>
+            <span
+              *ngIf="personalDetails.get('dob').hasError('required') && (personalDetails.get('dob').touched || personalDetails.get('dob').dirty)">
+              <span class="errText">Must select Date Of Birth.</span>
+            </span>
+
+            <ion-item>
+              <ion-label position="floating">Mobile No
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="phone" type="tel" maxlength="10" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="personalDetails.get('phone').hasError('required') && (personalDetails.get('phone').touched || personalDetails.get('phone').dirty)">
+              <span class="errText">Enter Mobile Number.</span>
+            </span>
+            <span class="error"
+              *ngIf="personalDetails.get('phone').hasError('maxlength') && (personalDetails.get('phone').touched || personalDetails.get('phone').dirty)">
+              <span class="errText">Mobile Number should have 10 Numbers.</span>
+            </span>
+            <span class="error"
+              *ngIf="personalDetails.get('phone').hasError('pattern') && (personalDetails.get('phone').touched || personalDetails.get('phone').dirty)">
+              <span class="errText">Enter Valid Mobile Number.</span>
+            </span>
+
+            <ion-item>
+              <ion-label position="floating">E-mail
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="email" type="text" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="personalDetails.get('email').hasError('required') && (personalDetails.get('email').touched || personalDetails.get('email').dirty)">
+              <span class="errText">Enter Email.</span>
+            </span>
+            <span class="error"
+              *ngIf="personalDetails.get('email').hasError('pattern') && (personalDetails.get('email').touched || personalDetails.get('email').dirty)">
+              <span class="errText">Enter Valid Email.</span>
+            </span>
+
+            <ion-item *ngIf="usertype != 'A'">
+              <ion-label position="floating">Relationship with Applicant
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="relationship" [disabled]="disableScope">
+                <ion-select-option *ngFor="let rel of GlobalRelationShip" [value]="rel.llvOptionVal">
+                  {{rel.llvOptionDesc}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error" *ngIf="usertype != 'A'">
+              <span class="errText"
+                *ngIf="personalDetails.get('relationship').hasError('required') && (personalDetails.get('relationship').touched) && (personalDetails.get('relationship').invalid)">Select
+                Relationship of Applicant.</span>
+            </span>
+
+
+            <ion-item>
+              <ion-label position="floating">Company Name
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="company" type="text" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="personalDetails.get('company').hasError('pattern') && (personalDetails.get('company').touched || personalDetails.get('company').dirty)">
+              <span class="errText">Special Characters are Not Allowed</span>
+            </span>
+            <span class="error"
+              *ngIf="personalDetails.get('company').hasError('required') && (personalDetails.get('company').touched || personalDetails.get('company').dirty)">
+              <span class="errText">Enter Company Name.</span>
+            </span>
+
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">Customer category
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="customerCategory" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of custCategory" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('customerCategory').hasError('required') && (personalDetails.get('customerCategory').touched) && (personalDetails.get('customerCategory').invalid)">
+              <span class="errText">Select Customer Category.</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">Nationality
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="custNationality" [disabled]="disableScope">
+                <ion-select-option *ngFor="let national of nationality" [value]="national.value">{{national.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('custNationality').hasError('required') && (personalDetails.get('custNationality').touched || personalDetails.get('custNationality').dirty)">
+              <span class="errText">Select Nationality.</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">STL customer
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="stlCustomer" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of stlCustomer" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('stlCustomer').hasError('required') && (personalDetails.get('stlCustomer').touched || personalDetails.get('stlCustomer').dirty)">
+              <span class="errText">Select STL Customer.</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">Customer Type
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="custType" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of Customertype" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('custType').hasError('required') && (personalDetails.get('custType').touched || personalDetails.get('custType').dirty)">
+              <span class="errText">Select Customer Type.</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">Banking With
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="bankingWith" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of bankingWith" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('bankingWith').hasError('required') && (personalDetails.get('bankingWith').touched || personalDetails.get('bankingWith').dirty)">
+              <span class="errText">Banking With?</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">VIP Flag
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="vipFlag" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of VIPflag" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('vipFlag').hasError('required') && (personalDetails.get('vipFlag').touched || personalDetails.get('vipFlag').dirty)">
+              <span class="errText">Select VIP Flag</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">Income Assignment
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="incomeAssign" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of incomeAssign" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span class="error"
+              *ngIf="personalDetails.get('incomeAssign').hasError('required') && (personalDetails.get('incomeAssign').touched || personalDetails.get('incomeAssign').dirty)">
+              <span class="errText">Select Income Assignment</span>
+            </span>
+
+            <ion-item>
+              <ion-label style="width:100%;" position="floating">CBRB result
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="popover" formControlName="cbrbResult" [disabled]="disableScope">
+                <ion-select-option *ngFor="let proof of CBRBdata" [value]="proof.value">{{proof.Name}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('cbrbResult').hasError('required') && (personalDetails.get('cbrbResult').touched || personalDetails.get('cbrbResult').dirty)">
+              <span class="errText">Enter CBRB result</span>
+            </span>
+
+            <ion-item>
+              <ion-label position="floating">EIDA No.
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="eidaNo" type="tel" [disabled]="disableScope"></ion-input>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('eidaNo').hasError('required') && (personalDetails.get('eidaNo').touched || personalDetails.get('eidaNo').dirty)">
+              <span class="errText">Enter EIDA No. </span>
+            </span>
+
+            <ion-item>
+              <ion-label position="floating">Acc. No.
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="accNo" type="tel" [disabled]="disableScope"></ion-input>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('accNo').hasError('required') && (personalDetails.get('accNo').touched || personalDetails.get('accNo').dirty)">
+              <span class="errText">Enter Account Number </span>
+            </span>
+
+
+            <!-- <ion-item>
+              <ion-label position="floating">Al Ethiad Credit Bureau
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="alEthiadBureau" type="text" [disabled]="disableScope"></ion-input>
+              
+            </ion-item> -->
+
+            <ion-grid>
+              <ion-row>
+                <ion-col style="margin:0px;padding:0px;margin-left:10px">
+                  <ion-label style="font-size: 12px;color: #999;">Al Ethiad Credit Bureau <span
+                      class="mandatory">*</span></ion-label>
+                </ion-col>
+              </ion-row>
+              <ion-row style="border-bottom: 1px solid #dddbdb;">
+                <ion-col size="10">
+                  <input formControlName="alEthiadBureau" type="text" *ngIf="!disableScope" disabled [disabled]="disableScope" style="background:white;">
+                  <input formControlName="alEthiadBureau" type="text" *ngIf="disableScope" disabled style="background:white;color:#999;">
+                </ion-col>
+                <ion-col size="2" class="ion-float-right">
+                  <ion-icon name="speedometer" style="float:right; zoom:1.3;" (click)="getCreditvalue()"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+            <span class="error"
+              *ngIf="personalDetails.get('alEthiadBureau').hasError('required') && (personalDetails.get('alEthiadBureau').touched || personalDetails.get('alEthiadBureau').dirty)">
+              <span class="errText">Enter Credit Bureau </span>
+            </span>
+
+
+            <ion-item>
+              <ion-label position="floating">Passport No.
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="passportNo" type="text" [disabled]="disableScope"></ion-input>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('passportNo').hasError('required') && (personalDetails.get('passportNo').touched || personalDetails.get('passportNo').dirty)">
+              <span class="errText">Enter Passport Number </span>
+            </span>
+
+
+
+            <ion-item>
+              <ion-label position="floating">RIM No.
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="rimNo" type="tel" [disabled]="disableScope"></ion-input>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('rimNo').hasError('required') && (personalDetails.get('rimNo').touched || personalDetails.get('rimNo').dirty)">
+              <span class="errText">Enter RIM No </span>
+            </span>
+
+
+            <ion-item>
+              <ion-label position="floating">P.O Box No.
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="poBoxNo" type="tel" [disabled]="disableScope"></ion-input>
+            </ion-item>
+
+            <span class="error"
+              *ngIf="personalDetails.get('poBoxNo').hasError('required') && (personalDetails.get('poBoxNo').touched || personalDetails.get('poBoxNo').dirty)">
+              <span class="errText">Enter P.O Box No. </span>
+            </span>
+
+
+            <div class="segment4" style="margin-top: 5px;">
+              <ion-segment [(ngModel)]="addressswitch" [ngModelOptions]="{standalone: true}">
+                <ion-segment-button value="caddress" ngSelected="true" class="resadd"
+                  (ionSelect)="addressSwitch('caddress')">Current
+                  Address</ion-segment-button>
+                <ion-segment-button value="paddress" class="paradd" (ionSelect)="addressSwitch('paddress')">Permanent
+                  Address</ion-segment-button>
+              </ion-segment>
+            </div>
+
+            <div *ngIf="addressswitch==='caddress'">
+              <ion-item>
+                <ion-label fixed>Address
+                  <span class="mandatory">*</span>
+                </ion-label>
+                <ion-textarea rows=2 formControlName="address" [disabled]="disableScope">
+                </ion-textarea>
+
+              </ion-item>
+
+              <span
+                *ngIf="!personalDetails.controls.address.valid  && (personalDetails.controls.address.dirty || personalDetails.controls.address.touched)">
+                <span class="errText">Please Enter Address</span>
+              </span>
+            </div>
+
+            <div *ngIf="addressswitch==='paddress'">
+              <ion-item>
+                <ion-checkbox (ionChange)="getCheckedStatus()" [disabled]="disableScope" color="orangepart"
+                  [(ngModel)]="ionCheck" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+                <ion-label style="border-bottom: 0;border: 0;text-indent: 10px;">Same As Current Address</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-label fixed>Address
+                  <span class="mandatory">*</span>
+                </ion-label>
+                <ion-textarea rows=2 style='overflow: auto; position: relative;' formControlName="permaddress1"
+                  readonly></ion-textarea>
+              </ion-item>
+              <span
+                *ngIf="!personalDetails.controls.permaddress1.valid  && (personalDetails.controls.permaddress1.dirty || personalDetails.controls.permaddress1.touched)">
+                <span class="errText">Please Enter Address</span>
+              </span>
+            </div>
+
+            <!-- <div class="buttspace roundbtn" *ngIf="disableScope=='true'" class="ion-text-center">
+              <ion-button  type="submit" shape="round" color="orangepart">Save</ion-button>
+            </div> -->
+            <div class="buttspace roundbtn" *ngIf="disableScope=='false'" class="ion-text-center">
+              <ion-button [disabled]="personalDetails.invalid" type="submit" shape="round" color="orangepart">Save
+              </ion-button>
+            </div>
+            <!--              <div class="buttspace">
+<button ion-button type="submit" color="danger">Save</button>
+</div>
+ -->
+          </form>
+        </div>
+      </ion-slide>
+
+
+      <ion-slide *ngIf="slisho">
+        <div *ngSwitchCase="'loan'" style="width:100%; padding:10px;">
+          <h2 class="headtitel">Loan Details</h2>
+
+
+          <form [formGroup]="loanDetails" (ngSubmit)="checkLoanSaveValues(loanDetails.value)">
+            <ion-item>
+              <ion-label position="floating">Loan Product
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="product"
+                (ionChange)="fetchLoanproduct(loanDetails.value)" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of GlobalProductList" [value]="product.lpdProdNewId">
+                  {{product.lpdPrdDesc}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <!--   <span *ngIf="!loanDetails.controls.product.valid && (loanDetails.controls.product.dirty || loanDetails.controls.product.touched)">
+              <span class="errText">Must select Product.</span>
+            </span> -->
+            <span class="error"
+              *ngIf="loanDetails.get('product').hasError('required') && (loanDetails.get('product').touched || loanDetails.get('product').dirty)">
+              <span class="errText">Must select Product.</span>
+            </span>
+
+
+
+            <ion-item>
+              <ion-label position="floating">Amount Requested <span
+                  style="text-indent:5px;color:#999;font-weight:bold;">(د.إ)</span>
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="amount" (ionBlur)="ValidateLoan(loanDetails.value)" type="tel" maxlength="13"
+                [disabled]="disableScope"></ion-input>
+
+            </ion-item>
+
+            <span class="error"
+              *ngIf="loanDetails.get('amount').hasError('required') && (loanDetails.get('amount').touched || loanDetails.get('amount').dirty)">
+              <span class="errText">Enter Amount.</span>
+            </span>
+            <span class="error"
+              *ngIf="loanDetails.get('amount').hasError('pattern') && (loanDetails.get('amount').touched || loanDetails.get('amount').dirty)">
+              <span class="errText">Enter Valid Amount.</span>
+            </span>
+            <span class="error"
+              *ngIf="loanDetails.get('amount').hasError('min') && (loanDetails.get('amount').touched || loanDetails.get('amount').dirty)">
+              <span class="errText">Minimum Requested Amount is 1000/-.</span>
+            </span>
+            <p style="color:red;font-size: smaller;margin: 0;padding: 0;" *ngIf="!ProperAmount">{{lnErrorMsg}}</p>
+            <ion-item>
+              <ion-label position="floating">Interest Type
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" (ionChange)="ValidateLoanAmount(loanDetails.value)"
+                formControlName="interesttype" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of GlobalInterestType" [value]="product.llvOptionVal">
+                  {{product.llvOptionDesc}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('interesttype').hasError('required') && (loanDetails.get('interesttype').touched || loanDetails.get('interesttype').dirty)">
+              <span class="errText">Select Interest Type.</span>
+            </span>
+
+            <ion-item *ngIf="showMclr">
+              <ion-label position="floating">Interest Rate Defined
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" (ionChange)="valudateMclr(loanDetails.value)" formControlName="mclr"
+                [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of GlobalMclrList" [value]="product.llvOptionVal">
+                  {{product.llvOptionDesc}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('mclr').hasError('required') && (loanDetails.get('mclr').touched || loanDetails.get('mclr').dirty)">
+              <span class="errText">Select MCLR.</span>
+            </span>
+
+
+            <!-- <ion-item>
+              <ion-label position="floating">Priority
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="priority" (ionChange)="validatePriority(loanDetails.value)" [disabled]="disableScope">
+                <ion-option value="1">Yes</ion-option>
+                <ion-option value="2">No</ion-option> 
+              </ion-select>
+            </ion-item>
+             <span class="error" *ngIf="loanDetails.get('priority').hasError('required') && (loanDetails.get('priority').touched || loanDetails.get('priority').dirty)">
+                <span class="errText">Select Priority.</span>
+              </span>  -->
+            <ion-item>
+              <ion-label position="floating">Periodicity of Installments <span
+                  style="text-indent:5px;color:#999; ">(Months)</span>
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="tenure" type="tel" maxlength="3"
+                (ionBlur)="checkTenorPeriod(loanDetails.value)" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('tenure').hasError('required') && (loanDetails.get('tenure').touched || loanDetails.get('tenure').dirty)">
+              <span class="errText">Enter Tenure.</span>
+            </span>
+            <span class="error"
+              *ngIf="loanDetails.get('tenure').hasError('pattern') && (loanDetails.get('tenure').touched || loanDetails.get('tenure').dirty)">
+              <span class="errText">Enter Valid Tenure.</span>
+            </span>
+            <p style="color:red;font-size: smaller;margin: 0;padding: 0;" *ngIf="TenorFlag">Tenure ({{TenorFrom}} -
+              {{TenorTo}})</p>
+            <ion-item class="morat">
+              <!-- <ion-label style="padding-bottom:25px !important;">Moratorium -->
+              <ion-label position="floating">Moratorium <span style="text-indent:5px;color:#999; ">(Months)</span>
+                <span class="mandatory">*</span>
+                <!-- <span class="mandatory">*</span> -->
+              </ion-label>
+              <!--               <ion-input class="moratPlaceholder" placeholder="0.00" formControlName="moratorium" type="tel"></ion-input> -->
+              <ion-input formControlName="moratorium" type="tel" maxlength="2"
+                (ionChange)="checkMoratoriamPeriod(loanDetails.value)" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('moratorium').hasError('required') && (loanDetails.get('moratorium').touched || loanDetails.get('moratorium').dirty)">
+              <span class="errText">Enter Moratorium.</span>
+            </span>
+            <span class="error"
+              *ngIf="loanDetails.get('moratorium').hasError('pattern') && (loanDetails.get('moratorium').touched || loanDetails.get('moratorium').dirty)">
+              <span class="errText">Enter Valid Moratorium.</span>
+            </span>
+            <p style="color:red;font-size: smaller;margin: 0;padding: 0;" *ngIf="MorotoriamFlag">Moratorium (0 -
+              {{MorotoriamMax}})</p>
+
+            <ion-item>
+              <ion-label position="floating">Product Value
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="producttype" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of ProductType" [value]="product.code">{{product.Desc}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('producttype').hasError('required') && (loanDetails.get('producttype').touched || loanDetails.get('producttype').dirty)">
+              <span class="errText">Select Product Value.</span>
+            </span>
+
+            <ion-item>
+              <ion-label position="floating">Loan Amount Range <span
+                  style="text-indent:5px;color:#999;font-weight:bold;">( د.إ)</span>
+
+              </ion-label>
+              <ion-input type=tel formControlName="loan_amount_range" [disabled]="disableScope" maxLength="8">
+              </ion-input>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('loan_amount_range').hasError('required') && (loanDetails.get('loan_amount_range').touched || loanDetails.get('loan_amount_range').dirty)">
+              <span class="errText">Enter Loan Amount.</span>
+            </span>
+            <span class="error" *ngIf="(loanDetails.get('loan_amount_range').hasError('min') &&
+              (loanDetails.get('loan_amount_range').touched || loanDetails.get('loan_amount_range').dirty))">
+              <span class="errText">Minimum Loan Amount Range is 2,50,000.00</span>
+            </span>
+            <span class="error" *ngIf="(loanDetails.get('loan_amount_range').hasError('max') &&
+            (loanDetails.get('loan_amount_range').touched || loanDetails.get('loan_amount_range').dirty))">
+              <span class="errText">Maximum Loan Amount Range is 2,50,00,000.00</span>
+            </span>
+            <!-- <ion-item>
+              <ion-label floating>ROI
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="rio" [readonly]="true" type="tel" inputmode="numeric" [disabled]="disableScope"></ion-input>
+            </ion-item>
+            <span class="error" *ngIf="loanDetails.get('rio').hasError('required') && (loanDetails.get('rio').touched || loanDetails.get('rio').dirty)">
+                <span class="errText">ROI Required.</span>
+              </span>  -->
+
+
+            <!-- <ion-item>
+              <ion-label floating>Project Cost ₹
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input formControlName="cost" type="tel" maxlength="12" [disabled]="disableScope"></ion-input>
+            </ion-item>
+           <span class="error" *ngIf="loanDetails.get('cost').hasError('required') && (loanDetails.get('cost').touched || loanDetails.get('cost').dirty)">
+                <span class="errText">Enter Project Cost.</span>
+              </span>  -->
+            <!-- <span class="error" *ngIf="loanDetails.get('cost').hasError('pattern') && (loanDetails.get('cost').touched || loanDetails.get('cost').dirty)">
+                <span class="errText">Enter Valid Project Cost.</span>
+              </span> -->
+            <ion-item *ngIf="loanPurpose">
+              <ion-label position="floating">Purpose Of Loan
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="loanpurpose" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of loanPurpose" [value]="product.llvOptionVal">
+                  {{product.llvOptionDesc}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <span class="error"
+              *ngIf="loanDetails.get('loanpurpose').hasError('required') && (loanDetails.get('loanpurpose').touched || loanDetails.get('loanpurpose').dirty)">
+              <span class="errText">Loan Purpose Required.</span>
+            </span>
+
+            <ion-item>
+              <ion-label position="floating">Repayment Type
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="repaymentType" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of Repaymenttype" [value]="product.llvOptionVal">{{product.Desc}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Mode of Repayment
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="repaymentMode" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of Repaymentmode" [value]="product.llvOptionVal">{{product.Desc}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Proposal Type
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="proposalType" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of Proposal" [value]="product.llvOptionVal">{{product.Desc}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Amortization chart
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-select interface="action-sheet" formControlName="amortization" [disabled]="disableScope">
+                <ion-select-option *ngFor="let product of Amortization" [value]="product.llvOptionVal">{{product.Desc}}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
+
+            <!-- <div class="buttspace roundbtn" class="ion-text-center">
+              <ion-button [disabled]="disableScope || loanDetails.invalid" shape="round" type="submit" color="orangepart">Save</ion-button>
+            </div> -->
+            <div class="buttspace roundbtn" *ngIf="disableScope=='false'" class="ion-text-center">
+              <ion-button [disabled]="loanDetails.invalid" shape="round" type="submit" color="orangepart">Save
+              </ion-button>
+            </div>
+          </form>
+
+
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+
+        <div *ngSwitchCase="'kyc'" style="width:100%; padding:10px;">
+          <h2 class="headtitel">KYC Details</h2>
+          <ion-grid>
+            <form [formGroup]="kyc">
+              <ion-row>
+                <ion-col size="4">
+                  <h6 class="titletext" text-left>EIDA No.
+                    <span class="mandatory">*</span>
+                  </h6>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item style="margin-top:0 !important;padding-left:0px !important;">
+                    <ion-input autocomplete="off" autocorrect="off" spellcheck="false" formControlName="pancard"
+                      type="text" [disabled]="disableScope" (ionChange)="convertouppercase(kyc.value)"></ion-input>
+                  </ion-item>
+                  <span
+                    *ngIf="!kyc.controls.pancard.valid  && (kyc.controls.pancard.dirty || kyc.controls.pancard.touched)">
+                    <span class="errText">Please Enter a valid EIDA Number.</span>
+                  </span>
+                </ion-col>
+
+                <ion-col size="1" (click)="kycPanModal()">
+                  <div style="margin-top:5% !important;">
+                    <ion-icon color="headpart" style="font-size:30px;" name="images"></ion-icon>
+                  </div>
+                </ion-col>
+
+              </ion-row>
+              <ion-row>
+                <ion-col size="4">
+                  <h6 class="titletext" text-left>Passport No.
+                    <span class="mandatory">*</span>
+                  </h6>
+                </ion-col>
+                <ion-col size="7">
+                  <ion-item style="margin-top:0 !important;padding-left:0px !important;">
+                    <ion-input autocomplete="off" autocorrect="off" spellcheck="false" formControlName="aadhaar"
+                      type="tel" maxlength="12" [disabled]="disableScope"></ion-input>
+                  </ion-item>
+                  <span
+                    *ngIf="!kyc.controls.aadhaar.valid  && (kyc.controls.aadhaar.dirty || kyc.controls.aadhaar.touched)">
+                    <span class="errText">Please Enter a valid Passport No.</span>
+                  </span>
+                </ion-col>
+
+                <ion-col size="1" (click)="kycAadharModal()">
+                  <div style="margin-top:5% !important;">
+                    <ion-icon color="headpart" style="font-size:30px;" name="images"></ion-icon>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </form>
+          </ion-grid>
+
+          <div>
+            <ion-card color="light" class="ccardkyc">
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="ion-text-center">
+                    <span class="titlesize">
+                      <b>Identity Proofs</b>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+          </div>
+
+          <div>
+            <ion-grid>
+              <form [formGroup]="addProof">
+                <ion-row>
+                  <ion-col size="4">
+
+                    <ion-item>
+                      <ion-label style="width:100%;font-size: 13px;" position="floating">Document
+                        <!-- <span class="mandatory">*</span> -->
+                      </ion-label>
+                      <ion-select interface="popover" formControlName="kycDesc" [disabled]="disableScope" (ionChange)="proofChange($event)">
+                        <ion-select-option *ngFor="let proof of idProof" value="{{proof.value}}">{{proof.proofName}}
+                        </ion-select-option>
+                      </ion-select>
+                      <span
+                        *ngIf="!addProof.controls.kycDesc.valid  && (addProof.controls.kycDesc.dirty || addProof.controls.kycDesc.touched)">
+                        <span class="errText">Please Select a Description.</span>
+                      </span>
+                    </ion-item>
+
+                    <!-- <ion-item (click)="openDocModel()">
+              <ion-label position="floating">Document
+                <span class="mandatory">*</span>
+              </ion-label>
+              <ion-input disabled type="text" [disabled]="disableScope" [readonly]="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="docdescription.docdes" ></ion-input>              
+             </ion-item> -->
+
+
+                  </ion-col>
+                  <ion-col size="5">
+
+                    <ion-item
+                      style="margin-left:0px !important;border-right: none !important;border-left:none !important;">
+                      <ion-label position="floating">Doc Number
+                        <span class="mandatory">*</span>
+                      </ion-label>
+                      <ion-input type="text" formControlName="kycNum" [disabled]="disableScope" style="font-size: 11px;"></ion-input>
+                    </ion-item>
+                    <span
+                      *ngIf="!addProof.controls.kycNum.valid  && (addProof.controls.kycNum.dirty || addProof.controls.kycNum.touched)">
+                      <span class="errText">Please Enter a Document Number.</span>
+                    </span>
+                  </ion-col>
+                  
+                  <ion-col size="1" (click)="ocr_scan()">
+                    <!-- <ion-icon ios="ios-qr-scanner" md="md-qr-scanner" class="ocr_icon" ></ion-icon> -->
+                    <img src="../../assets/imgs/ocr.png" class="ocr_icon">
+                  </ion-col>
+
+                  <ion-col size="2" style="padding-top:0.8rem;">
+                    <!-- <ion-icon name="md-add-circle" [disabled]="kyc.invalid" class="kycaddButton" (click)="kycAddProof(addProof.value)"></ion-icon> -->
+                    <ion-button *ngIf="disableScope=='false'" color="headpart" style="--border-radius:25px;"
+                      [disabled]="addProof.invalid" (click)="kycAddProof(addProof.value)">
+                      <ion-icon class="addplus" name="add"></ion-icon>
+                    </ion-button>
+                    <ion-button *ngIf="disableScope=='true'" color="headpart" style="--border-radius:25px;"
+                      [disabled]="disableScope" (click)="kycAddProof(addProof.value)">
+                      <ion-icon class="addplus" name="add"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+
+                </ion-row>
+              </form>
+            </ion-grid>
+          </div>
+
+
+          <div>
+            <ion-card color="light" class="ccardkyc">
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="ion-text-center" size="3">
+                    <span class="titlesize">
+                      <b>Doc-Type</b>
+                    </span>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="5">
+                    <span class="titlesize">
+                      <b>Doc-Num</b>
+                    </span>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="2">
+                    <span class="titlesize">
+                      <b>Delete</b>
+                    </span>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="2">
+                    <span class="titlesize">
+                      <b>Image</b>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+
+            <ion-grid>
+              <ion-row *ngFor="let kycuser of kycData">
+                <ion-col class="ion-text-center" size="3" (click)="getProofDetail(kycuser)">
+                  <b>{{kycuser.kycDesc}}</b>
+                </ion-col>
+                <ion-col class="ion-text-center" size="5" (click)="getProofDetail(kycuser)">{{kycuser.kycNum}}</ion-col>
+                <ion-col class="ion-text-center" size="2">
+                  <ion-icon style="color:red;font-size:30px;" ios="ios-trash" md="md-trash"
+                    (click)="removeKycDoc(kycuser)"></ion-icon>
+                </ion-col>
+                <ion-col class="ion-text-center" size="2" (click)="kycProofModal(kycuser)">
+                  <ion-icon color="headpart" style="font-size:30px;" name="images"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+          <div class="buttspace roundbtn" *ngIf="disableScope=='false'" class="ion-text-center">
+            <ion-button color="orangepart" [disabled]="kyc.invalid" shape="round" (click)="kycPanDetails(kyc.value)">
+              Save
+            </ion-button>
+          </div>
+          <div class="buttspace roundbtn" *ngIf="disableScope=='true'" class="ion-text-center">
+            <ion-button color="orangepart" [disabled]="disableScope" shape="round" (click)="kycPanDetails(kyc.value)">
+              Save
+            </ion-button>
+          </div>
+        </div>
+      </ion-slide>
+
+
+      <ion-slide>
+        <div *ngSwitchCase="'expences'" style="width:100%; padding:10px;">
+          <form [formGroup]="otherdoc" (ngSubmit)="othersave(otherdoc.value)">
+            <h2 class="headtitel" (click)="openDocModel()">Other Documents</h2>
+
+            <ion-grid>
+              <ion-row>
+                <ion-row>
+
+                </ion-row>
+                <ion-col size="4">
+                  <!--  <ion-item>
+                    <ion-label position="floating" style="white-space: nowrap;width:100%;font-size: 13px;">Doc-Type</ion-label>
+                    <ion-select formControlName="otherdoctype" [disabled]="disableScope">
+                      <ion-option *ngFor="let otherdoctype of otherdocinfo">{{otherdoctype.otherdocname}}</ion-option>
+                    </ion-select>
+                  </ion-item> -->
+
+                  <ion-item (click)="openDocModel()">
+                    <ion-label position="floating" (click)="openDocModel()">Document
+                      <span class="mandatory">*</span>
+                    </ion-label>
+
+                    <ion-input disabled type="text" [disabled]="disableScope" [readonly]="true"
+                      [ngModelOptions]="{standalone: true}" [(ngModel)]="docdescription.docdes"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="5">
+                  <ion-item>
+                    <ion-label position="floating">Description
+                      <!-- <span class="mandatory">*</span> -->
+                    </ion-label>
+                    <ion-input formControlName="otherdes" type="text" [disabled]="disableScope"></ion-input>
+                  </ion-item>
+                  <!-- <span *ngIf="!kyc.controls.pancard.valid  && (kyc.controls.pancard.dirty || kyc.controls.pancard.touched)">
+<span class="errText">Please Enter a valid PAN Number.</span>
+</span> -->
+                  <span class="error"
+                    *ngIf="otherdoc.get('otherdes').hasError('required') && (otherdoc.get('otherdes').touched || otherdoc.get('otherdes').dirty)">
+                    <span class="errText">Enter Document Description</span>
+                  </span>
+                  <span class="error"
+                    *ngIf="otherdoc.get('otherdes').hasError('pattern') && (otherdoc.get('otherdes').touched || otherdoc.get('otherdes').dirty)">
+                    <span class="errText">Enter Valid Document Description</span>
+                  </span>
+                </ion-col>
+                <ion-col size="3">
+                  <div class="docbut" class="ion-text-center">
+                    <ion-button type="submit" shape="round" color="orangepart" [disabled]="otherdoc.invalid">Save
+                    </ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+
+
+
+            </ion-grid>
+          </form>
+          <div>
+            <ion-card color="light" class="ccardkyc">
+              <ion-grid>
+                <ion-row>
+                  <ion-col class="ion-text-center" size="3">
+                    <span class="titlesize">
+                      <b>Description</b>
+                    </span>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="5">
+                    <span class="titlesize">
+                      <b>Doc-Type</b>
+                    </span>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="2">
+                    <span class="titlesize">
+                      <b>Delete</b>
+                    </span>
+                  </ion-col>
+                  <ion-col class="ion-text-center" size="2">
+                    <span class="titlesize">
+                      <b>Attach</b>
+                    </span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+
+            <ion-grid>
+              <ion-row *ngFor="let others of otherData;let i=index">
+                <ion-col class="ion-text-center" size="3" (click)="othervaluepass(others)">
+                  <span class="titlesize">
+                    <b>{{others.otherdes}}</b>
+                  </span>
+                </ion-col>
+                <ion-col class="ion-text-center" size="5" (click)="othervaluepass(others)">
+                  <span class="titlesize">
+                    <b>{{others.otherdoctype}}</b>
+                  </span>
+                </ion-col>
+                <ion-col class="ion-text-center" size="2" (click)="removeDoc(others)">
+                  <ion-icon style="color:red;font-size:30px;" ios="ios-trash" md="md-trash"></ion-icon>
+                </ion-col>
+                <ion-col class="ion-text-center" size="2" (click)="kycModal(others)">
+                  <ion-icon color="headpart" style="font-size:30px;" name="images"></ion-icon>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
+          </div>
+          <!-- <div>
+<ion-grid>
+<ion-row *ngFor="let others of otherData;let i=index">
+<ion-col>
+<p>{{others.otherdes}}</p>
+</ion-col>
+<ion-col size="3">
+<img [src]="others.docpath" class="docimg">
+</ion-col>
+<ion-col c0l-3>
+<p (click)="removeDoc(others)">
+<ion-icon name="trash" color="danger"></ion-icon>
+</p>
+</ion-col>
+</ion-row>
+</ion-grid>
+</div> -->
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <div *ngSwitchCase="'income'" style="width:100%; padding:10px;">
+          <h2 class="headtitel">Income and Expense</h2>
+          <div *ngIf="checkshow">
+            <ion-item>
+              <ion-label>Do you want include income for eligibility?</ion-label>
+              <!--              <ion-select (ionChange)="incomeshowhide()" [(ngModel)]="incomeyesno">
+                <ion-option value="yes">Yes</ion-option>
+                <ion-option value="no">No</ion-option>
+              </ion-select>
+-->
+            </ion-item>
+            <div class="segment1">
+              <!--    <ion-toolbar no-border-top no-border-bottom color="headpart" class="margt">-->
+              <ion-segment [(ngModel)]="incomeyesno" (click)="incomeshowhide()" [disabled]="disableScope">
+                <ion-segment-button value="no" class="incomeno">NO</ion-segment-button>
+
+                <ion-segment-button value="yes" class="incomeyes" [disabled]="gudisableScope">YES</ion-segment-button>
+              </ion-segment>
+            </div>
+
+
+            <div class="buttspace roundbtn" *ngIf="incomeyesno == 'no'" class="ion-text-center">
+              <ion-button type="button" shape="round" color="orangepart" [disabled]="false"
+                *ngIf="disableScope=='false'" (click)="dummyincomesave()"> Save </ion-button>
+              <ion-button type="button" shape="round" color="orangepart" [disabled]="true" *ngIf="disableScope=='true'">
+                SAVE
+              </ion-button>
+            </div>
+
+            <!-- <ion-toggle (ionChange)="incomeshowhide()" [(ngModel)]="incomeyesno" toggle-class="toggle-calm"></ion-toggle> -->
+
+          </div>
+          <div *ngIf="incomeshow">
+            <!--            <ion-item>
+                         <ion-label position="floating">Income or Expense Required
+                           <span class="mandantory">*</span>
+                         </ion-label>
+                          <ion-select (ionChange)="onChangeType()" [(ngModel)]="type_income">
+                           <ion-option value="income">Income</ion-option>
+                           <ion-option value="expense">Expense</ion-option>
+                         </ion-select>
+                         </ion-item>
+                          -->
+            <ion-item style="padding-top:20px">
+              <ion-label class="radioLabel">Income Required
+                <span class="mandantory">*</span>
+              </ion-label>
+            </ion-item>
+            <ion-radio-group (ionChange)="onChangeType()" [(ngModel)]="type_income">
+              <ion-row class="radiobuttondesign">
+                <ion-col size="1"></ion-col>
+                <ion-item size="4" no-lines>
+                  <ion-label style="padding-right:10px;">Income</ion-label>
+                  <ion-radio value="income" name="income" checked="true" style="--color-checked:#fcad26"></ion-radio>
+                </ion-item>
+                <ion-col size="2"></ion-col>
+                <ion-item size="4" no-lines>
+                  <ion-label style="padding-right:10px;">Obligation</ion-label>
+                  <ion-radio value="expense" name="expense" style="--color-checked:#fcad26"></ion-radio>
+                </ion-item>
+                <ion-col size="1"></ion-col>
+              </ion-row>
+            </ion-radio-group>
+
+            <div *ngIf="boolean_income">
+              <form [formGroup]="income" (ngSubmit)="incomesave(income.value)">
+                <ion-card class="ccard1">
+                  <ion-grid style="width:98vw;">
+                    <ion-row>
+                      <ion-col class="ion-text-center">
+                        <span class="titlesize">
+                          <b>Income Details</b>
+                        </span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card>
+                <!-- <ion-grid radio-group formControlName="category">
+                  <ion-row>
+                    <ion-col>
+                      <ion-item no-lines>
+                        <ion-label class="radioLabel">Employment Type
+                          <span class="mandatory">*</span>
+                        </ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="borderBottom">
+                    <ion-item size="4" no-lines>
+                      <ion-radio value="Salaried" name="Salaried" [checked]="true" [disabled]="disableScope"></ion-radio>
+                      <ion-label>Salaried</ion-label>
+                    </ion-item>
+                    <ion-col col-1></ion-col>
+                    <ion-item size="6" no-lines>
+                      <ion-radio value="Self-Employed" name="Self-Employed" [disabled]="disableScope"></ion-radio>
+                      <ion-label>Self-Employed</ion-label>
+                    </ion-item>
+                    <ion-col col-1></ion-col>
+                  </ion-row>
+                </ion-grid>
+
+             
+                <span *ngIf="!income.controls.category.valid && (income.controls.category.dirty || income.controls.category.touched)">
+                  <span class="errText">Must select Employment Type.</span>
+                </span> -->
+
+
+
+
+                <ion-item>
+                  <ion-label position="floating">Employement Category
+                    <span class="mandatory">*</span>
+                  </ion-label>
+                  <ion-select interface="action-sheet" formControlName="category" [disabled]="disableScope">
+                    <ion-select-option *ngFor="let emp of GlobalEmploymentList" [value]="emp.llvOptionVal">
+                      {{emp.llvOptionDesc}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <span class="error"
+                  *ngIf="(!income.controls.category.valid || income.controls.category.errors) && (income.controls.category.dirty || income.controls.category.touched)">
+                  <span class="errText" *ngIf="income.controls.category.errors.required">Must select Employment
+                    Type.</span>
+                </span>
+
+                <ion-item>
+                  <ion-label position="floating">Employer Name
+                    <span class="mandatory">*</span>
+                  </ion-label>
+                  <ion-input type="text" formControlName="empName" [disabled]="disableScope"></ion-input>
+                </ion-item>
+
+                <span class="error"
+                  *ngIf="(!income.controls.empName.valid || income.controls.empName.errors) && (income.controls.empName.dirty || income.controls.empName.touched)">
+                  <span class="errText" *ngIf="income.controls.empName.errors.required">Enter Employer Name.</span>
+                  <span class="errText" *ngIf="income.controls.empName.errors.pattern">Enter a Valid Employer
+                    Name.</span>
+                </span>
+
+                <div class="newdate">
+                  <ion-item>
+                    <ion-label position="floating">D.O.J
+                      <span class="mandatory">*</span>
+                    </ion-label>
+
+                    <ion-input type="date" formControlName="doj" min="1900-01-01" [max]="getToday()"
+                      displayFormat="DD/MM/YYYY" [disabled]="disableScope"></ion-input>
+                  </ion-item>
+                </div>
+                  <span class="error"
+                    *ngIf="(!income.controls.doj.valid || income.controls.doj.errors) && (income.controls.doj.dirty || income.controls.doj.touched)">
+                    <span class="errText" *ngIf="income.controls.doj.errors.required">Select Date of Joining.</span>
+                  </span>
+                
+
+                <ion-item>
+                  <ion-label position="floating">EOSB
+                    <span class="mandatory">*</span>
+                  </ion-label>
+                  <ion-input type="tel" formControlName="eosb" [disabled]="disableScope"></ion-input>
+                </ion-item>
+
+                <span class="error"
+                  *ngIf="(!income.controls.eosb.valid || income.controls.eosb.errors) && (income.controls.eosb.dirty || income.controls.eosb.touched)">
+                  <span class="errText" *ngIf="income.controls.eosb.errors.required">Enter EOSB Value.</span>
+                </span>
+
+                <ion-item>
+                  <ion-label position="floating">Length in service <span
+                      style="text-indent:5px;color:#999;">(Months)</span>
+                    <span class="mandatory">*</span>
+                  </ion-label>
+                  <ion-input type="tel" formControlName="lengthService" [disabled]="disableScope"></ion-input>
+                </ion-item>
+
+                <span class="error"
+                  *ngIf="(!income.controls.lengthService.valid || income.controls.lengthService.errors) && (income.controls.lengthService.dirty || income.controls.lengthService.touched)">
+                  <span class="errText" *ngIf="income.controls.lengthService.errors.required">Enter Length
+                    service.</span>
+                </span>
+
+                <ion-grid>
+                  <ion-radio-group formControlName="incometype">
+
+                    <ion-row style="margin:0px;padding:0px;">
+                      <ion-col size="4">
+                        <ion-item lines="none">
+                          <ion-label class="radioLabel">Income Type
+                            <span class="mandatory">*</span>
+                          </ion-label>
+                        </ion-item>
+                      </ion-col>
+
+
+                      <ion-col size="4">
+                        <ion-item lines="none">
+                          <ion-label>Monthly &nbsp; &nbsp;</ion-label>
+                          <ion-radio value="E" name="Monthly" checked [disabled]="disableScope"
+                            style="--color-checked:#313679;"></ion-radio>
+
+                        </ion-item>
+                      </ion-col>
+
+                      <ion-col size="4">
+                        <ion-item lines="none">
+                          <ion-label>Yearly</ion-label>
+                          <ion-radio value="Y" name="Yearly" [disabled]="disableScope" style="--color-checked:#313679;">
+                          </ion-radio>
+
+                        </ion-item>
+                      </ion-col>
+
+
+                    </ion-row>
+                  </ion-radio-group>
+                </ion-grid>
+
+
+                <!--                <div formControlName="incometype">
+                  <ion-list radio-group [(ngModel)]="incomeDuration">
+                    <ion-row class="radiobuttondesign1">
+                      <ion-col col-1></ion-col>
+                      <ion-item size="4" no-lines>
+                        <ion-label>Monthly</ion-label>
+                        <ion-radio value="Monthly" name="Monthly" checked="true"></ion-radio>
+                      </ion-item>
+                      <ion-col size="2"></ion-col>
+                      <ion-item size="4" no-lines>
+                        <ion-label>Yearly</ion-label>
+                        <ion-radio value="Yearly" name="Yearly"></ion-radio>
+                      </ion-item>
+                      <ion-col col-1></ion-col>
+                    </ion-row>
+                  </ion-list>
+                </div>
+-->
+                <span
+                  *ngIf="!income.controls.incometype.valid && (income.controls.incometype.dirty || income.controls.incometype.touched)">
+                  <span class="errText">Must select Income Type.</span>
+                </span>
+
+
+                <ion-card color="light" class="ccardkyc">
+
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col class="ion-text-center" size="6">
+                        <span class="titlesize">
+                          <b>Description</b>
+                        </span>
+                      </ion-col>
+                      <ion-col c0l-6 (click)="addincomefield()">
+                        <span class="titlesize">
+                          <b>Amount</b>
+                        </span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="6">
+
+                      <ion-label class="description_label">Gross Income <span
+                          style="color:#999;font-weight:bold; text-indent:6px;">(د.إ)</span>
+                        <span class="mandatory">*</span>
+                      </ion-label>
+
+                    </ion-col>
+
+                    <ion-col size="6">
+                      <ion-item>
+
+                        <ion-input formControlName="grossincome" type="tel" maxlength="10" placeholder="Amount"
+                          name="grossincome" (ionChange)="incomecal()" [(ngModel)]="grossincome"
+                          [disabled]="disableScope">
+
+                        </ion-input>
+                      </ion-item>
+                      <span
+                        *ngIf="!income.controls.grossincome.valid && (income.controls.grossincome.dirty || income.controls.grossincome.touched)">
+                        <span class="errText">Please Enter a valid Gross Income.</span>
+                      </span>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col size="6">
+
+                      <ion-label class="description_label" text-left>Statutory
+                        Deductions <span style="color:#999;font-weight:bold; text-indent:6px;">(د.إ)</span>
+                        <span class="mandatory">*</span>
+                      </ion-label>
+
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item>
+                        <ion-input formControlName="statutory" type="tel" maxlength="10" placeholder="Amount"
+                          (ionChange)="incomecal()" [(ngModel)]="statutory_deductions" [disabled]="disableScope">
+                        </ion-input>
+                      </ion-item>
+
+                      <span class="error"
+                        *ngIf="(!income.controls.statutory.valid || income.controls.statutory.errors )  && (income.controls.statutory.dirty || income.controls.statutory.touched)">
+                        <span class="errText" *ngIf="income.controls.statutory.errors.pattern">Please Enter a valid
+                          Statutory Deductions.</span>
+                        <span class="errText" *ngIf="income.controls.statutory.errors.required">Enter Statutory
+                          Deduction Value.</span>
+                        <span class="errText" *ngIf="income.controls.statutory.errors.max">Statutory Deductions must be
+                          less than Gross Income.</span>
+                      </span>
+
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col size="6">
+
+                      <ion-label class="description_label" text-left> Others
+                        Deductions <span style="color:#999;font-weight:bold; text-indent:6px;">(د.إ)</span>
+                        <span class="mandatory">*</span>
+                      </ion-label>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item>
+
+                        <ion-input formControlName="other" type="tel" maxlength="10" placeholder="Amount"
+                          (ionChange)="incomecal()" [(ngModel)]="other_deductions" [disabled]="disableScope">
+                        </ion-input>
+                      </ion-item>
+                      <span class="error"
+                        *ngIf="(!income.controls.other.valid || income.controls.other.errors )  && (income.controls.other.dirty || income.controls.other.touched)">
+                        <span class="errText" *ngIf="income.controls.other.errors.pattern">Please Enter a valid
+                          value.</span>
+                        <span class="errText" *ngIf="income.controls.other.errors.required">Enter Other Deduction
+                          Value.</span>
+                        <span class="errText" *ngIf="income.controls.other.errors.max">Other Deductions must be less
+                          than Gross Income.</span>
+                      </span>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col size="6">
+
+                      <ion-label class="description_label" text-left>Net income
+                        after deduction <span style="color:#999;font-weight:bold; text-indent:6px;">(د.إ)</span>
+                        <span class="mandatory">*</span>
+                      </ion-label>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item>
+
+                        <ion-input formControlName="netincome" type="number" placeholder="Amount"
+                          (ionChange)="incomecal()" [(ngModel)]="net_income" [readonly]="true"
+                          [disabled]="disableScope"></ion-input>
+                      </ion-item>
+                      <span
+                        *ngIf="!income.controls.netincome.valid && (income.controls.netincome.dirty || income.controls.netincome.touched)">
+                        <span class="errText">Enter Your Net Income.</span>
+                      </span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+
+
+                <!-- <ion-card color="light" class="ccardkyc">
+
+
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col class="ion-text-center" col-10>
+                          <span class="titlesize">
+                            <b>EMI</b>
+                          </span>
+                        </ion-col>
+  
+  
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card> -->
+
+
+                <!-- <ion-grid>
+                    <ion-row>
+                      <ion-col size="6">
+  
+  
+                        <ion-label class="description_label" text-left>Amount
+                          <span class="mandatory"></span>
+                        </ion-label>
+  
+  
+                      </ion-col>
+  
+  
+                      <ion-col size="6">
+                        <ion-item>
+  
+  
+                          <ion-input readonly="true" type="tel" maxlength="10" placeholder="Rs 32,749.00"
+                            name="grossincome" (ionChange)="incomecal()" [disabled]="disableScope">
+  
+  
+                          </ion-input>
+                        </ion-item>
+  
+  
+                      </ion-col>
+                    </ion-row>
+  
+  
+                    <ion-row>
+                      <ion-col size="6">
+  
+  
+                        <ion-label class="description_label" text-left>Starting
+                          <br />Date
+                          <span class="mandatory"></span>
+                        </ion-label>
+  
+  
+                      </ion-col>
+                      <ion-col size="6">
+                        <ion-item>
+                          <ion-input readonly="true" type="tel" maxlength="10" placeholder="12/06/2019"
+                            (ionChange)="incomecal()" [disabled]="disableScope">
+                          </ion-input>
+                        </ion-item>
+  
+  
+                      </ion-col>
+                    </ion-row>
+  
+  
+                    <ion-row>
+                      <ion-col size="6">
+  
+  
+                        <ion-label class="description_label" text-left> Ending
+                          <br />Date
+                          <span class="mandatory"></span>
+                        </ion-label>
+                      </ion-col>
+                      <ion-col size="6">
+                        <ion-item>
+                          <ion-input readonly="true" type="tel" maxlength="10" placeholder="12/11/2019"
+                            (ionChange)="incomecal()" [disabled]="disableScope">
+                          </ion-input>
+                        </ion-item>
+  
+  
+                      </ion-col>
+                    </ion-row>
+  
+  
+  
+  
+                  </ion-grid> -->
+
+                <div formArrayName="otherincomes" margin-bottom>
+                  <div>
+                    <ion-card color="light" class="ccardkyc">
+
+                      <ion-grid class="ion-grid">
+                        <ion-row justify-content-center align-items-center>
+                          <ion-col class="ion-text-center" size="10">
+                            <span class="titlesize">
+                              <b>OTHER INCOME</b>
+                            </span>
+                          </ion-col>
+                          <ion-col class="plusAddButton" size="2" (click)="addincomefield()">
+                            <ion-icon class="btn-2" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                            <!--<div class="item" style="background: #2469b4;">
+                              <span text-left style="font-size: 15px;">ADD</span>
+                              <span text-right><ion-icon class="btn-2" ios="ios-add-circle" md="md-add-circle" style="font-size: 20px"></ion-icon></span>
+                            </div>-->
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-card>
+                  </div>
+
+                  <section [formGroupName]="i"
+                    *ngFor="let tech of income['controls'].otherincomes['controls']; let i = index">
+
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="floating">Other Income {{ i + 1 }}</ion-label>
+                            <!-- <ion-input type="text" maxlength="50" formControlName="iname" [disabled]="disableScope"></ion-input> -->
+                            <ion-select interface="popover" formControlName="iname" [disabled]="disableScope">
+                              <ion-select-option *ngFor="let incomval of GlobalIncomeList"
+                                (ionSelect)="checkExists(incomval.llvOptionVal,{i:i,incid:tech.get('otherincomeid').value})"
+                                [value]="incomval.llvOptionVal">{{incomval.llvOptionDesc}}</ion-select-option>
+                            </ion-select>
+
+
+                          </ion-item>
+                          <span
+                            *ngIf="tech.get('iname').hasError('required') && (tech.get('iname').touched || tech.get('iname').dirty)">
+                            <span class="errText">Select Other Income.</span>
+                          </span>
+                          <span
+                            *ngIf="tech.get('iname').hasError('pattern') && (tech.get('iname').touched || tech.get('iname').dirty)">
+                            <span class="errText">Enter Valid Amount.</span>
+                          </span>
+                        </ion-col>
+                        <ion-col size="5">
+                          <ion-item>
+                            <ion-label position="floating">Amount</ion-label>
+                            <ion-input type="tel" maxlength="10" formControlName="iotamount" [disabled]="disableScope">
+                            </ion-input>
+                          </ion-item>
+                          <span
+                            *ngIf="tech.get('iotamount').hasError('required') && (tech.get('iotamount').touched || tech.get('iotamount').dirty)">
+                            <span class="errText">Enter Amount.</span>
+                          </span>
+                          <span
+                            *ngIf="tech.get('iotamount').hasError('pattern') && (tech.get('iotamount').touched || tech.get('iotamount').dirty)">
+                            <span class="errText">Enter Valid Amount.</span>
+                          </span>
+
+                        </ion-col>
+                        <ion-col size="1" (click)="removeIncomeField({i:i,incid:tech.get('otherincomeid').value})">
+                          <ion-icon class="removeIncomeIcon" color="headpart" ios="ios-close-circle"
+                            md="md-close-circle"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </section>
+                  <!--  <span *ngIf="!income.controls.otherincomes.valid && (income.controls.otherincomes.dirty || income.controls.otherincomes.touched)">
+                    <span class="errText">Fill Valid Other Income Fields.</span>
+                  </span> -->
+                </div>
+                <div class="buttspace roundbtn" *ngIf="disableScope=='true'" class="ion-text-center">
+                  <ion-button type="submit" [disabled]="disableScope" shape="round" color="orangepart"> Save
+                  </ion-button>
+                </div>
+                <div class="buttspace roundbtn" *ngIf="disableScope=='false'" class="ion-text-center">
+                  <ion-button type="submit" [disabled]="income.invalid" shape="round" color="orangepart"> Save
+                  </ion-button>
+                </div>
+              </form>
+            </div>
+            <div *ngIf="boolean_expense">
+              <form [formGroup]="expences" (ngSubmit)="expencessave(expences.value)">
+                <!--<ion-card class="ccard1">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col text-center>
+                        <span class="titlesize">
+<b>OBLIGATION</b>
+</span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card>-->
+                <!-- <h5 style="color:#115cad;font-size:1.4rem;">OBLIGATION</h5> -->
+
+                <div formArrayName="obligatins" margin-bottom>
+                  <div>
+                    <ion-card color="light" class="ccardkyc">
+
+                      <ion-grid class="paddingadd">
+                        <ion-row class="ion-text-center">
+                          <ion-col text-left size="4" class="ion-padding-top">
+                            <span class="titlesize">
+                              <b class="ion-padding-start">BANK NAME</b>
+                            </span>
+                          </ion-col>
+                          <ion-col class="ion-text-right" size="6" class="ion-padding-top">
+                            <span class="titlesize">
+                              <b>OUTSTANDING AMOUNT</b>
+                            </span>
+                          </ion-col>
+                          <ion-col size="2" class="plusAddButton" (click)="addobligationfield()">
+                            <ion-icon class="btn-2" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                            <!--<b> ADD</b>-->
+                            <!--<div class="item" style="background: #2469b4;">
+                              <span text-left style="font-size: 15px;">ADD</span>
+                              <span text-right><ion-icon class="btn-2" ios="ios-add-circle" md="md-add-circle" style="font-size: 20px"></ion-icon></span>
+                            </div>-->
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-card>
+                  </div>
+
+                  <section [formGroupName]="i"
+                    *ngFor="let tech of expences['controls'].obligatins['controls']; let i = index">
+
+                    <ion-grid>
+                      <!-- <ion-row>
+                            <button ion-button id="mbtn" (click)="slideToggle()">SlideToggle</button>
+                            <div id="mdiv">Some context</div>
+                        </ion-row> -->
+                      <ion-row class="moreinfo-box">
+                        <ion-col size="5">
+                          <ion-item>
+                            <ion-label position="floating" id="moreinfo-labels">Bank Name {{ i + 1 }}</ion-label>
+                            <ion-input type="text" maxlength="50" formControlName="bankname" [disabled]="disableScope">
+                            </ion-input>
+                          </ion-item>
+                          <span class="error"
+                            *ngIf="tech.get('bankname').hasError('required') && (tech.get('bankname').touched || tech.get('bankname').dirty)">
+                            <span class="errText">Enter Bank Name</span>
+                          </span>
+                          <span class="error"
+                            *ngIf="tech.get('bankname').hasError('pattern') && (tech.get('bankname').touched || tech.get('bankname').dirty)">
+                            <span class="errText">No Special Characters and Numbers are allowed</span>
+                          </span>
+                        </ion-col>
+                        <ion-col size="4">
+                          <ion-item>
+                            <ion-label position="floating" id="moreinfo-labels">Amount</ion-label>
+                            <ion-input type="tel" maxlength="10" formControlName="emiamount" (ionChange)="otherEMItot()"
+                              [disabled]="disableScope"></ion-input>
+                          </ion-item>
+                          <span class="error"
+                            *ngIf="tech.get('emiamount').hasError('required') && (tech.get('emiamount').touched || tech.get('emiamount').dirty)">
+                            <span class="errText">Enter Amount</span>
+                          </span>
+                          <span class="error"
+                            *ngIf="tech.get('emiamount').hasError('pattern') && (tech.get('emiamount').touched || tech.get('emiamount').dirty)">
+                            <span class="errText">Enter Valid Amount</span>
+                          </span>
+                        </ion-col>
+                        <ion-col size="3" style="margin-top:21px;" class="ion-text-left">
+                          <ion-button class="moreinfo_button" type=button (click)="moreinfo_openmodal()">
+                            <span style="font-size:8px;">More Info</span> &nbsp;
+                            <ion-icon [name]="!tech.controls.hide ? 'information-circle' : 'arrow-dropup'" color="white"
+                              class="moreinfo-icon"></ion-icon>
+                          </ion-button>
+                        </ion-col>
+                        <!-- <ion-col col-1 (click)="removeObligationField({i:i,obgid:tech.get('bankid').value})" >
+                          <ion-icon class="removeIncomeIcon" color="headpart" ios="ios-close-circle" md="md-close-circle"></ion-icon>
+                        </ion-col> -->
+
+                      </ion-row>
+
+                    </ion-grid>
+                  </section>
+                </div>
+
+                <!--      <div formArrayName="otherexpences" margin-bottom>
+                  <div>
+                    <ion-card color="light" class="ccardkyc">
+
+                      <ion-grid class="paddingadd">
+                        <ion-row justify-content-center align-items-center>
+                          <ion-col text-center col-10>
+                            <span class="titlesize">
+                              <b>OTHER EXPENSES</b>
+                            </span>
+                          </ion-col>
+                          <ion-col class="plusAddButton" size="2" (click)="addexpencefield()">
+                            <ion-icon class="btn-2" ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                           
+                          </ion-col>
+                        </ion-row>
+                      </ion-grid>
+                    </ion-card>
+                  </div>
+
+                  <section [formGroupName]="i" *ngFor="let tech of expences.controls.otherexpences.controls; let i = index">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-item>
+                            <ion-label position="floating">Other Expense {{ i + 1 }}</ion-label>
+                            <ion-input type="text" maxlength="50" formControlName="otherex" [disabled]="disableScope"></ion-input>
+                          </ion-item>
+
+                        </ion-col>
+                        <ion-col size="5">
+                          <ion-item>
+                            <ion-label position="floating">Amount</ion-label>
+                            <ion-input type="tel" maxlength="10" formControlName="otiamount" (ionChange)="otherexptot()" [disabled]="disableScope"></ion-input>
+                          </ion-item>
+
+                        </ion-col>
+                        <ion-col col-1 (click)="removeExpenceField({i:i,oexid:tech.get('otherexpenceid').value})">
+                          <ion-icon class="removeIncomeIcon" color="headpart" ios="ios-close-circle" md="md-close-circle"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </section>
+                </div> -->
+
+                <ion-grid>
+                  <!-- <ion-row>
+                    <ion-col size="6">
+                      <ion-item class="borderbott">
+                        <ion-label text-left style="margin-bottom: -5px;">Total Expenses ₹
+                          <span class="mandatory">*</span>
+                        </ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item>
+
+                        <ion-input formControlName="totalexpences" type="number" [(ngModel)]="extotal" [readonly]="true" [disabled]="disableScope"></ion-input>
+                      </ion-item>
+                      <span *ngIf="!expences.controls.totalexpences.valid && (expences.controls.totalexpences.dirty || expences.controls.totalexpences.touched)">
+                        <span class="errText">Enter Your Total Other Expenses</span>
+                      </span>
+                    </ion-col>
+                  </ion-row> -->
+
+                  <ion-row>
+                    <ion-col size="6">
+                      <ion-item class="borderbott">
+                        <ion-label text-left style="margin-bottom: -5px;">Total Loan Repayment ₹
+                          <span class="mandatory">*</span>
+                        </ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-item>
+                        <ion-input type="number" [ngModelOptions]="{standalone: true}" [(ngModel)]="newExpenseTotal"
+                          [readonly]="true" [disabled]="disableScope"></ion-input>
+                      </ion-item>
+                      <!--  <span *ngIf="!expences.controls.overallexpences.valid && (expences.controls.overallexpences.dirty || expences.controls.overallexpences.touched)">
+                        <span class="errText">Enter Your Overall Expenses.</span>
+                      </span> -->
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <div class="buttspace roundbtn" *ngIf="disableScope=='false'" class="ion-text-center">
+                  <ion-button type="submit" shape="round" [disabled]="expences.invalid" color="orangepart"> Save
+                  </ion-button>
+                </div>
+                <div class="buttspace roundbtn" *ngIf="disableScope=='true'" class="ion-text-center">
+                  <ion-button type="submit" shape="round" [disabled]="disableScope" color="orangepart"> Save
+                  </ion-button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide (onLoad)=eligibility()>
+
+        <div *ngSwitchCase="'eligibility'" class="eligibilityslide no-scroll" style="width:100%; padding:10px;">
+
+
+          <div class="sticky">
+            <h2 class="headtitle">Eligibility and Deviation </h2>
+            <ion-grid>
+              <div class="tableSticky" id="headerSticky">
+                <ion-row class="tablehead">
+                  <ion-col text-left size="6">
+                    <h5 class="Eliglablehead"><strong>Parameter</strong></h5>
+                  </ion-col>
+                  <ion-col size="3" class="ion-text-right">
+                    <h5><strong>Value</strong></h5>
+                  </ion-col>
+                  <ion-col text-right size="3">
+                    <h5><strong>Status</strong></h5>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-grid>
+          </div>
+          <div class="second">
+            <form [formGroup]="" class="eligForm">
+              <ion-grid>
+                <div class="tableSticky-container">
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Customer Age</strong> <br />
+                        <span class="elig-required">(21-60)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="25" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Customer Salary</strong> <br />
+                        <span class="elig-required">(5,000.00)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="47,000.00" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Customer Nationality</strong> <br />
+                        <span class="elig-required">(Does Not belong to Restricted Nationality)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="INDIA" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Employer Name</strong> <br />
+                        <span class="elig-required">(Whether Un-Approved / Black Listed?)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="No" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Employer / Company Business Activites</strong> <br />
+                        <span class="elig-required">(Not Belongs to Restricted Activity)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value=" " readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Employer Type: Salaried / Pensioner</strong><br />
+                        <span class="elig-required">(SALARIED, SELF EMPLOYED, SAL + PENSION)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="SALARIED" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Tenor</strong><br />
+                        <span class="elig-required">(6 - 300)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="300" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Finance Amount</strong><br />
+                        <span class="elig-required">(10,000.00 - 705,000.00)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="456,570.00" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Length of Service / Business</strong><br />
+                        <span class="elig-required">(3)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="8" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>DBR</strong><br />
+                        <span class="elig-required">(50.00)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="6.87" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Special PacKage for Specific Employers </strong><br />
+                        <span class="elig-required">(Is Special Packaged Employer ?)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value=" " readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="checkmark-circle-outline" class="elig-status-checkicon" color="success">
+                      </ion-icon>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row>
+                    <ion-col text-left size="7">
+                      <div class="titletext Eliglable"><strong>Income Assignment</strong> <br />
+                        <span class="elig-required">(A)</span>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="3">
+                      <div>
+                        <ion-input type="text" value="" readonly></ion-input>
+                      </div>
+                    </ion-col>
+                    <ion-col class="ion-text-center" size="2">
+                      <ion-icon name="ios-close-circle" class="elig-status-closeicon" color="danger"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+
+              </ion-grid>
+
+
+              <div class="elig_button_box">
+                <div class="elig_button_box_container" class="ion-text-center">
+                  <ion-button type="submit" shape="round" color="orangepart">Edit</ion-button>
+                  <!-- <ion-button type="submit" shape="round" color="orangepart">Save</ion-button> -->
+                  <!-- <ion-button type="submit" shape="round" color="orangepart">Delete</ion-button> -->
+                  <ion-button type="button" shape="round" color="orangepart" (click)="pagetoView()"
+                    style="--background-activated:#313679;">Submit</ion-button>
+
+
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+
+        </div>
+      </ion-slide>
+
+
+    </ion-slides>
+  </div>
+
+</ion-content>

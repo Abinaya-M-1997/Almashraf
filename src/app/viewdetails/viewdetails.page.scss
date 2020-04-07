@@ -1,0 +1,202 @@
+.toolbar-background-md {
+  border-color: #b2b2b2;
+}
+.toolbar-title-md {
+  padding: 0 12px;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+.bar-button-default-md,
+.bar-button-clear-md-default,
+.bar-button-md-default {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.userDetails {
+  text-align: left;
+  color: white;
+  margin-left: 3%;
+}
+.userDetails h2 {
+  text-align: center;
+  font-size: 26px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.userDetails h4 {
+  font-size: 22px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+
+ion-title {
+  position: absolute !important;
+  width: 100% !important;
+  min-height: 56px;
+  text-align: center !important;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+.nets {
+  width: 12px;
+  height: 13px;
+  margin-top: 3%;
+  margin-left: -8px;
+}
+.subs {
+  color: green;
+  margin-left: 2px;
+}
+.subd {
+  color: rgb(241, 14, 14);
+}
+.calls {
+  color: gray;
+}
+.seginfo {
+  margin-bottom: 2%;
+}
+.segment-md .segment-button {
+  color: #ffffff !important;
+}
+.segment-md .segment-button.activated,
+.segment-md .segment-button.segment-activated {
+  opacity: 1;
+  border-color: #ffffff;
+}
+.fab-md-primary {
+  color: #fff;
+}
+.imageround {
+  width: 100px !important;
+  height: 100px !important;
+  border-radius: 50% !important;
+}
+
+#profiletext h2 {
+  font-size: 19px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: black;
+  margin-top: 0px;
+}
+
+#subtext p {
+  font-size: 16px;
+  color: gray;
+  margin: 0px;
+}
+
+.viewimg {
+  margin-left: 8%;
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 50% !important;
+}
+.fname {
+  color: #ffffff;
+}
+
+.segment ion-toolbar {
+  padding: 0 !important;
+  min-height: auto !important;
+  //border-bottom: 3px solid #f8c42a;
+}
+
+.segment .segment-md .segment-button.segment-activated {
+  border: 0px;
+  background-color: #f8c42a;
+}
+
+.mergt {
+  padding-bottom: 0px !important;
+}
+
+.colorvalue {
+  color: gray;
+}
+
+//     @media only screen and (min-width: 0px) and (max-width: 401px) {
+
+//         .viewimg{
+//             width:85%;
+//             border-radius:50%;
+//         }
+// }
+// @media only screen and (min-width: 400px) {
+
+//     .viewimg{
+//         width:85%;
+//         border-radius:50%;
+//     }
+
+// }
+// @media only screen and (min-width: 500px) {
+
+//     .viewimg{
+//         width:68%;
+//         border-radius:50%;
+//     }
+
+// }
+// @media only screen and (min-width: 600px) {
+
+//     .viewimg{
+//         width:57%;
+//         border-radius:50%;
+//     }
+
+// }
+
+scroll-content {
+  padding-bottom: 0 !important;
+}
+
+.navIcon {
+  margin: 14px 0px 6px 0px;
+}
+ion-list,
+.coApplSwipe.item,
+.coApplSwipe.item-block,
+.coApplSwipe.item-md,
+.coApplSwipe .item-inner,
+.coApplSwipe .input-wrapper,
+.coApplSwipe .label-md,
+.coApplSwipe ion-card,
+.coApplSwipe {
+  margin: 0px 0px 0px 0px !important;
+  padding: 0px 0px 0px 0px !important;
+}
+
+.swipeView {
+  margin-top: 7px !important;
+}
+.swipeView .card-md {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+  width: calc(100% - 0px) !important;
+  border-radius: 2px;
+  background: #fff;
+  border: solid thin rgba(0, 0, 0, 0.14) !important;
+}
+
+.slidingion.item-wrapper {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+ion-segment {
+  --background: #313679;
+  --background-checked: #f8c42a;
+
+  --background-hover: #f8c42a;
+  //--background-activated: red;
+  --color: none;
+  --color-checked: #313679;
+  --color-checked-disabled: none;
+  --indicator-color: none;
+}

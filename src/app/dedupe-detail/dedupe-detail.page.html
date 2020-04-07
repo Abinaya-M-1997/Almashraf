@@ -1,0 +1,143 @@
+<ion-header>
+  <ion-toolbar color="headpart">
+    <ion-title class="ion-text-center" color="white" style="font-family: 'roboto';">Existing Applicant
+      <ion-icon name="close-circle-outline" style="float:right;zoom:1.5" (click)="closeModal()"></ion-icon>
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-wrapper">
+    <ion-grid>
+      <fieldset class="reducebottom">
+        <legend>
+          <ion-row>
+            <ion-col style="font-weight:bold; font-size:15px">PERSONAL DETAILS</ion-col>
+          </ion-row>
+        </legend>
+        <ion-row>
+          <ion-col>First Name</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.firstname}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Middle Name</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.middlename}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Last Name</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.lastname}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Email</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.email}}</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Mobile No</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.mobileno}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>EIDA No</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.EIDAno}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>Address</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.address}}</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12"></ion-col>
+        </ion-row>
+      </fieldset>
+
+
+
+      <fieldset class="reducebottom">
+        <legend>
+          <ion-row>
+            <ion-col style="font-weight:bold; font-size:15px">LOAN DETAILS</ion-col>
+          </ion-row>
+        </legend>
+        <ion-row>
+          <ion-col>Product</ion-col>
+          <ion-col>Personal Loan</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Amount Requested</ion-col>
+          <ion-col>{{ded_value_populated.loandetails.amountreq}} &nbsp; د.إ</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Repayment Mode</ion-col>
+          <ion-col>EMI</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Tenure</ion-col>
+          <ion-col>{{ded_value_populated.loandetails.installment}} &nbsp; Months </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12"></ion-col>
+        </ion-row>
+      </fieldset>
+
+
+
+      <fieldset>
+        <legend>
+          <ion-row>
+            <ion-col style="font-weight:bold; font-size:15px">INCOME DETAILS</ion-col>
+          </ion-row>
+        </legend>
+
+        <ion-row>
+          <ion-col>Employment Category</ion-col>
+          <ion-col>Government</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Employer Name</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.employername}}</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Income Type</ion-col>
+          <ion-col>Monthly</ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>Gross Income</ion-col>
+          <ion-col>{{ded_value_populated.customerdetails.grossincome}} &nbsp; د.إ</ion-col>
+        </ion-row>
+      </fieldset>
+
+    </ion-grid>
+
+  </div>
+</ion-content>
+
+<ion-footer class="ion-align-items-center" class="footer">
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <p style="margin:0;color:white;"> Would you like to proceed with Existing Application?</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button color="orange_clr" (click)="dedupeNo()">No</ion-button>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <ion-button color="orange_clr" (click)="dedupeProceed()">Proceed</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
+        block
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

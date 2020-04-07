@@ -1,0 +1,52 @@
+.ocrBtn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .NFCcard {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .nfcBtn {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 auto;
+    text-align: center;
+    left: 0;
+    right: 0;
+    background-color: #313679;
+    color: #f5c42d;
+  }
+  
+  .nfcInner {
+    border: 1px dashed #000;
+    margin: 5px;
+    height: calc(100% - 60px);
+  }
+  .text-ctn {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+  }
+  .card_container {
+    width: 50vw;
+    height: 50vh;
+    box-shadow: 5px 5px 15px 5px #757575;
+  }
+  
+  .sanc-icon {
+    // zoom: 2;
+    // color: orangered;
+    float: left;
+    z-index: auto;
+    font-size: 28px;
+  }
+  .ocrBtn {
+    --background: #313679;
+    color: #f5c42d;
+  }
+  

@@ -1,0 +1,522 @@
+<ion-header>
+  <ion-toolbar color="headpart" hideBackButton="true">
+    <button ion-button menuToggle>
+        <ion-icon color="white" name="menu"></ion-icon>
+      </button>
+    <ion-title style="margin-top: -1px;">Application/Documents</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div [ngSwitch]="viewAllAppl">
+    <div *ngSwitchCase="'viewApplication'">
+      <ion-card class="viewAllDetails">
+        <div *ngFor="let alluser of allusers">
+          <ion-row justify-content-center align-items-center>
+            <ion-col col-2></ion-col>
+            <ion-col col-8 class="viewAllImgcenter">
+              <ion-avatar align-items-center>
+                <img [src]="alluser.imagepath" class="viewimg" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col col-2></ion-col>
+          </ion-row>
+          <ion-row justify-content-center>
+            <ion-col col-2></ion-col>
+            <ion-col col-8 align-items-center>
+              <h2 class="applFullName" style="text-transform: capitalize;">{{alluser.firstName}}</h2>
+            </ion-col>
+            <ion-col col-2></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-6>
+              <p *ngIf="alluser?.product === 'Home Loan'" class="applProdcut">
+                <ion-icon name="home"></ion-icon> {{alluser.product}}
+              </p>
+              <p *ngIf="alluser?.product === 'Vehicle Loan'" class="applProdcut">
+                <ion-icon name="car"></ion-icon> {{alluser.product}}
+              </p>
+              <p *ngIf="alluser?.product === 'Education Loan'" class="applProdcut">
+                <ion-icon name="school"></ion-icon> {{alluser.product}}
+              </p>
+              <p *ngIf="alluser?.product === 'Personal Loan'" class="applProdcut">
+                <ion-icon name="person"></ion-icon> {{alluser.product}}
+              </p>
+              <p *ngIf="alluser?.product === 'No Product'" class="applProdcut">
+                <ion-icon name="cart"></ion-icon> {{alluser.product}}
+              </p>
+            </ion-col>
+            <ion-col col-6>
+              <p class="applLoanAmount">{{alluser.amount | currency:'INR'}}</p>
+            </ion-col>
+          </ion-row>
+        </div>
+      </ion-card>
+     
+       
+      
+        
+     
+      <div class="applcoappl">
+    <ion-item-group>
+     <ion-item-divider sticky no-lines no-padding>
+        <ion-card class="appcard" (click)="viewApplDetails()" sticky>
+          <h2 class="cardTitles">Applicant Details <!-- <ion-icon name="ios-arrow-down" *ngIf="arrowright" style="float:right;padding-right:10px;"></ion-icon><ion-icon name="ios-arrow-up" *ngIf="arrowdown" style="float:right;padding-right:10px;"></ion-icon> --></h2>
+        </ion-card>
+      </ion-item-divider>
+        <div *ngFor="let alluser of allusers">
+          <ion-grid *ngIf="applDetail" class="retrieveFont">
+              <ion-item>
+            <ion-row>
+              <ion-col col-5><b>First Name</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.firstName}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Middle Name</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.middleName}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Last Name</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.lastName}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Gender</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.gender}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Date of Birth</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.dob}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Address</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.address}}<br/>{{alluser.address2}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>City</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.city}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>District</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.district}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Pincode</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.pincode}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>State</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.state}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Permenant<br>Address1</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.peraddress1}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Permenant<br>Address2</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.peraddress2}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Permenant State</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.perstate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Per:City</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.percity}}</ion-col>
+            </ion-row>
+               <ion-row>
+              <ion-col col-5><b>Per:pincode</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.perpincode}}</ion-col>
+            </ion-row>
+               <ion-row>
+              <ion-col col-5><b>Per:District</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.perdistrict}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Product Type</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.product}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Loan Amount</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.amount | currency:'INR'}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Loan Duration</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.tenure}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Moratorium</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.moratorium}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Rate of Interest(%)</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.rio}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Pan Number</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.pancard}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Aadhaar Number</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{alluser.aadhaar}}</ion-col>
+            </ion-row>
+            <ion-row>
+            <ion-col col-5><b>Company Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{alluser.company}}</ion-col>
+          </ion-row>
+          </ion-item>
+          </ion-grid>
+        </div>
+      </ion-item-group>
+
+      <ion-item-group>
+      
+  <ion-list detail-none (click)="expandItem(item)" ion-item no-lines *ngFor="let item of items; let i = index" class="CoApplDetails">
+    <ion-item-divider sticky no-lines no-padding>
+    <ion-card class="fullWidth">
+      <h2 class="cardTitles1">Co-Applicant {{i + 1}} Details  <ion-icon name="ios-arrow-right" style="float:right;padding-right:10px;"></ion-icon><ion-icon name="ios-arrow-up" style="float:right;padding-right:10px;"></ion-icon></h2>
+    </ion-card>
+    </ion-item-divider>
+        <!-- <expandable [expandHeight]="itemExpandHeight" [expanded]="item.expanded"> -->
+        <ion-grid class="retrieveFont">
+            <ion-item>
+          <ion-row>
+            <ion-col col-5><b>First Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.firstName}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Middle Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.middleName}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Last Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.lastName}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Gender</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.gender}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Date of Birth</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.dob}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Address</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.address}}<br/>{{item.address2}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>City</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.city}}</ion-col>
+          </ion-row>
+           <ion-row>
+              <ion-col col-5><b>District</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.district}}</ion-col>
+            </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Pincode</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.pincode}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>State</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.state}}</ion-col>
+          </ion-row>
+           <ion-row>
+              <ion-col col-5><b>Permenant<br>Address1</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.peraddress1}}</ion-col>
+            </ion-row>
+           <ion-row>
+              <ion-col col-5><b>Permenant<br>Address2</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.peraddress2}}</ion-col>
+            </ion-row>
+          <ion-row>
+              <ion-col col-5><b>Permenant State</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.perstate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Per:City</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.percity}}</ion-col>
+            </ion-row>
+               <ion-row>
+              <ion-col col-5><b>Per:pincode</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.perpincode}}</ion-col>
+            </ion-row>
+               <ion-row>
+              <ion-col col-5><b>Per:District</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{item.perdistrict}}</ion-col>
+            </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Pan Number</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.pancard}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Aadhaar Number</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.aadhaar}}</ion-col>
+          </ion-row>
+           <ion-row>
+            <ion-col col-5><b>Relationship<br>with Applicant</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.RelationshipwithApplicant}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Company Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{item.company}}</ion-col>
+          </ion-row>
+          </ion-item>
+        </ion-grid>
+        <!-- </expandable> -->
+
+        </ion-list>
+        </ion-item-group>
+
+
+        <ion-list>
+          <button detail-none (click)="expandGuaranItem(gitem)" ion-item no-lines *ngFor="let gitem of gitems; let i = index" class="CoApplDetails">
+        <ion-card class="fullWidth">
+      <h2 class="cardTitles1">Guarantor {{i + 1}} Details</h2>
+    </ion-card>
+        <!-- <expandable [expandHeight]="gitemExpandHeight" [expanded]="gitem.expanded"> -->
+        <ion-grid class="retrieveFont">
+          <ion-row>
+            <ion-col col-5><b>First Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.firstName}}</ion-col>
+          </ion-row>
+                     <ion-row>
+            <ion-col col-5><b>Middle Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.middleName}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Last Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.lastName}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Gender</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.gender}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Date of Birth</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.dob}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Address</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.address}}<br/>{{gitem.address2}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>City</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.city}}</ion-col>
+          </ion-row>
+          <ion-row>
+              <ion-col col-5><b>District</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.district}}</ion-col>
+            </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Pincode</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.pincode}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>State</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.state}}</ion-col>
+          </ion-row>
+             <ion-row>
+              <ion-col col-5><b>Permenant<br>Address1</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.peraddress1}}</ion-col>
+            </ion-row>
+           <ion-row>
+              <ion-col col-5><b>Permenant<br>Address2</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.peraddress2}}</ion-col>
+            </ion-row>
+          <ion-row>
+              <ion-col col-5><b>Permenant State</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.perstate}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5><b>Per:City</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.percity}}</ion-col>
+            </ion-row>
+               <ion-row>
+              <ion-col col-5><b>Per:pincode</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.perpincode}}</ion-col>
+            </ion-row>
+               <ion-row>
+              <ion-col col-5><b>Per:District</b></ion-col>
+              <ion-col col-1>:</ion-col>
+              <ion-col col-6>{{gitem.perdistrict}}</ion-col>
+            </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Pan Number</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.pancard}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Aadhaar Number</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.aadhaar}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Relationship<br>with Applicant</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.RelationshipwithApplicant}}</ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5><b>Company Name</b></ion-col>
+            <ion-col col-1>:</ion-col>
+            <ion-col col-6>{{gitem.company}}</ion-col>
+          </ion-row>
+         </ion-grid>
+        <!-- </expandable> -->
+
+      </button>
+        </ion-list>
+      </div>
+    </div>
+    <div *ngSwitchCase="'viewDocuments'" class="margbot">
+      <h2 class="ImageTitles">Profile Images</h2>
+      <div *ngIf="profileImg">
+      <div *ngFor="let profImg of profImgs" class="iconImg">
+        <img [src]="profImg.imagepath" (click)="showImg(profImgs)" />
+      </div>
+    </div>
+      <div *ngIf="!profileImg">
+        <p><b>No Profile Image Found.</b></p>
+      </div>
+      <h2 class="ImageTitles top20">KYC Images</h2>
+      <div  *ngIf="kycImg">
+      <div *ngFor="let panImg of panImgs" class="iconImg">
+        <div >
+          <img [src]="panImg.panImageName" (click)="showPanImg(panImgs)" />
+        </div>
+</div>
+<div *ngFor="let AadharImg of AadharImgs" class="iconImg">
+  <div >
+    <img [src]="AadharImg.aadharImageName" (click)="showAadharImg(AadharImgs)" />
+  </div>
+</div>
+<div *ngFor="let ProofImg of ProofImgs" class="iconImg">
+  <div>
+    <img [src]="ProofImg.proofimgpath" (click)="showProofImg(ProofImgs)" />
+  </div>
+</div>
+</div>
+      <!-- <div  *ngIf="kycImg">
+<div class="hscroll">
+      <div *ngFor="let KYCImg of KYCImgs" class="iconImg">
+      <div *ngIf="!panImg">
+        <img [src]="KYCImg.panImageName" (click)="showImg(KYCImg)" />
+      </div>
+      
+      <div *ngIf="!aadharImg">
+        <img [src]="KYCImg.aadharImageName" (click)="showImg(KYCImg)" />
+        </div>
+      
+          <div *ngIf="!proofImg">
+        <img [src]="KYCImg.proofimgpath" (click)="showImg(KYCImg)"/>
+      </div>
+     
+      </div>
+    </div>
+    
+    <div class="iconImg">
+    <div *ngIf="panImg">
+      <img src="assets/imgs/nopanimg.png" class="kycnoimg"/>
+    </div>
+    <div *ngIf="aadharImg">
+      <img src="assets/imgs/noaadharimg.png" class="kycnoimg"/>
+    </div>
+    <div *ngIf="proofImg">
+      <img src="assets/imgs/Identitiy.png" class="kycnoimg"/>
+    </div>
+  </div>
+</div> -->
+
+      <div *ngIf="!kycImg">
+        <p><b>No Kyc Image Found.</b></p>
+      </div>
+      <h2 class="ImageTitles top20">Other Documents Images</h2>
+    <div *ngIf="othImg">
+      <div *ngFor="let otherImg of otherImgs" class="iconImg">
+        <img [src]="otherImg.otherimgpath" (click)="showOtherImg(otherImgs)"/>
+      </div>
+    </div>
+      <div *ngIf="!othImg">
+        <p><b>No OtherDoc Image Found.</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="viewsegment">
+    <ion-toolbar no-border-top no-border-bottom color="orangepart" class="margt">
+      <ion-segment [(ngModel)]="viewAllAppl">
+        <ion-segment-button value="viewApplication">
+          <span class="viewsegtext">View Application</span>
+        </ion-segment-button>
+        <ion-segment-button value="viewDocuments" (click)="viewallImg()">
+          <span class="viewsegtext">View Documents</span>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </div>
+
+  <ion-fab top right edge>
+    <button ion-fab color="light" (click)="callPDF()" color="primary"><ion-icon ios="ios-document" md="md-document"></ion-icon></button>
+  </ion-fab>
+
+
+
+
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <img style='float: right' src="assets/imgs/almasrafLogo.png" alt="" id="logo" text-end>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+  <div class="img-container">
+    <div> <img src="assets/imgs/abudhabi.jpg" alt=""></div>
+  </div>
+  <div *ngIf="loginok">
+    <form class="go-bottom">
+      <p>Please enter the same User ID and Password as used for Internet Banking...</p>
+      <div>
+        <input id="name" name="name" type="text" [(ngModel)]="login.uname" required>
+        <label for="name">USER ID</label>
+      </div>
+      <div>
+        <input id="phone" name="phone" type="password" [(ngModel)]="login.pwd" required>
+        <label for="phone">PASSWORD</label>
+      </div>
+    </form>
+    <div class="button" (click)="logindata1()">Login</div>
+  </div>
+
+
+  <div *ngIf="pin">
+    <form class="go-bottom">
+      <div>
+        <input id="name" name="name" type="number" [(ngModel)]="mypin" class="secu" required>
+        <label for="name">Enter Pin</label>
+      </div>
+    </form>
+    <div class="button" (click)="dologin1()">Login</div>
+  </div>
+
+
+  <div *ngIf="newpin">
+    <form class="go-bottom">
+
+      <div>
+        <input id="name" name="name" type="number" maxlength="4" [(ngModel)]="pina" class="secu" required>
+        <label for="name">Set new PIN</label>
+      </div>
+      <div>
+        <input id="phone" name="phone" type="number" maxlength="4" [(ngModel)]="pinb" class="secu" required>
+        <label for="phone">Confirm PIN</label>
+      </div>
+    </form>
+    <div class="button" (click)="setpin()">Continue</div>
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div class="background" style="background: rgba(255, 255, 255, 0.7);">&copy; SysArc Infomatix - LEND<i>perfect</i> -
+    {{ appVersion }}</div>
+</ion-footer>

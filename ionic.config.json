@@ -1,0 +1,7 @@
+{
+  "name": "newFeature",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

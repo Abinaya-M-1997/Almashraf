@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="headpart">
+    <ion-title color="light" text-center>{{title}}
+      <ion-icon name="arrow-back" class="sanc-icon" (click)="closeView()"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content style="background-color:white">
+  <div *ngIf=showOCR class="ocrBtn">
+    <ion-button class="ocrBtn" (click)="scanDocuments()">Scan</ion-button>
+  </div>
+
+
+  <div *ngIf=showNFC class="NFCcard">
+    <ion-card class="card_container">
+      <div class="nfcInner">
+        <p class="text-ctn">Place the card here</p>
+      </div>
+      <ion-button class="nfcBtn" (click)="scanDocuments()">Scan</ion-button>
+    </ion-card>
+  </div>
+</ion-content>

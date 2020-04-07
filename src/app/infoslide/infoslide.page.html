@@ -1,0 +1,19 @@
+<ion-content padding>
+  <ion-slides pager>
+    <ion-slide *ngFor="let imgVal of imgVals">
+      <img src="{{imgVal.imagepath}}"/>
+    </ion-slide>
+    <ion-slide *ngFor="let imgVal of panimgVals">
+      <img src="{{imgVal.panImageName}}"/>
+    </ion-slide>
+    <ion-slide *ngFor="let imgVal of aadharimgVals">
+      <img src="{{imgVal.aadharImageName}}"/>
+    </ion-slide>
+    <ion-slide *ngFor="let imgVal of proofimgVals">
+      <img src="{{imgVal.proofimgpath}}"/>
+    </ion-slide>
+    <ion-slide *ngFor="let imgVal of otherimgVals">
+      <img src="{{imgVal.otherimgpath}}"/>
+    </ion-slide>
+    </ion-slides>
+</ion-content>

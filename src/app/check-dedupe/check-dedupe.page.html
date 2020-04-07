@@ -1,0 +1,80 @@
+<ion-header>
+
+  <ion-toolbar color="headpart">
+    <ion-title color="white" class="ion-text-center">Dedupe Details</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+
+
+<ion-content padding>
+  <div class="box">
+    <form [formGroup]="dedupeDetails" (ngSubmit)="checkDedupe(dedupeDetails.value)">
+
+      <ion-item>
+        <ion-label position="floating">EIDA Number
+          <span class="mandatory">*</span>
+        </ion-label>
+        <ion-input formControlName="eidano" maxlength="12" type="tel"></ion-input>
+      </ion-item>
+
+      <span class="error"
+      *ngIf="dedupeDetails.get('eidano').hasError('required') && (dedupeDetails.get('eidano').touched || dedupeDetails.get('eidano').dirty)">
+      <span class="errText">Enter EIDA No.</span>
+    </span>
+    <span class="error"
+      *ngIf="dedupeDetails.get('eidano').hasError('pattern') && (dedupeDetails.get('eidano').touched || dedupeDetails.get('eidano').dirty)">
+      <span class="errText">Enter Valid EIDA No.</span>
+    </span>
+      
+
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="firstname" type="text"></ion-input>
+      </ion-item>
+
+      <span class="error"
+              *ngIf="dedupeDetails.get('firstname').hasError('pattern') && (dedupeDetails.get('firstname').touched || dedupeDetails.get('firstname').dirty)">
+              <span class="errText">Enter Valid First Name.</span>
+      </span>
+
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="lastname" type="text"></ion-input>
+      </ion-item>
+
+      <span class="error"
+              *ngIf="dedupeDetails.get('lastname').hasError('pattern') && (dedupeDetails.get('lastname').touched || dedupeDetails.get('lastname').dirty)">
+              <span class="errText">Enter Valid First Name.</span>
+      </span>
+
+      <ion-item>
+        <ion-label position="floating">Mobile No</ion-label>
+        <ion-input formControlName="mobileno"  maxlength="10" type="tel"></ion-input>
+      </ion-item>
+
+      <span class="error"
+        *ngIf="dedupeDetails.get('mobileno').hasError('pattern') && (dedupeDetails.get('mobileno').touched || dedupeDetails.get('mobileno').dirty)">
+        <span class="errText">Enter Valid Mobile No.</span>
+      </span>
+      
+
+      <ion-grid style="margin-top:10px;">
+        <ion-row class="ion-text-center">
+          <ion-col>
+            <ion-button class="dedupe" color="headpart" type="button" (click)="fetchEIDA(dedupeDetails.value)">Fetch EIDA Service
+            </ion-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-button class="dedupe" color="headpart" type="submit"> Check Dedupe</ion-button>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+
+</ion-content>

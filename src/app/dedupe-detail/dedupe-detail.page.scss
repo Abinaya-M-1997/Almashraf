@@ -1,0 +1,24 @@
+ion-grid {
+  color: #313679;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+legend {
+  color: #f8c42a;
+}
+
+fieldset {
+  border-color: rgba(49, 54, 121, 0.6);
+  border-width: 3px;
+  border-style: inset;
+}
+
+.reducebottom {
+  padding-bottom: 0px;
+}
+
+.footer {
+  --background: none;
+  background: #313679;
+}

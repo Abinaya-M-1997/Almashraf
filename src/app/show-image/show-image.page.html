@@ -1,0 +1,20 @@
+<ion-content padding class="showImage">
+  <ion-card style="box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);">
+
+    <!-- <ion-item>    
+      <h2>{{applicant.applicant_fname}} {{applicant.applicant_last_name}}</h2>
+    </ion-item> -->
+    <span class="profileName" *ngIf="applicant">
+      <h1><b style="color: #00518f;">Document</b></h1>
+    </span>
+    <img src="{{imageSrc|| '../../assets//imgs/profile.png'}}" style="height:100%;">
+    <ion-row text-center style="background-color: #488aff;">
+      <ion-col no-padding>
+        <ion-button color="light" (click)="updateimage()">
+          Update<ion-icon name="ios-checkmark-circle-outline"></ion-icon>
+          <!--<div>12 Likes</div>-->
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+</ion-content>

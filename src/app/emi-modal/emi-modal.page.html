@@ -1,0 +1,70 @@
+<ion-content padding style="--background: rgba(0,0,0,0.6)">
+
+  <div class="emimodal_box">
+
+    <h2 style="margin-top:20px;font-size:16px; font-family: 'Times New Roman', Times, serif;">EMI Information
+      <ion-icon name="close-circle" class="moreinfo_button" (click)="close_emiModal()"></ion-icon>
+    </h2>
+
+    <div class="emi_container">
+
+      <!-- <button type="button" class="moreinfo_button" color="orangepart" ion-button (click)="close_emiModal()">Close</button> -->
+
+
+      <form [formGroup]="emiModal">
+        <ion-item no-lines>
+          <ion-label position="floating" id="moreinfo-labels" class="emi-label">EMI Amount &nbsp; (د.إ)</ion-label>
+          <ion-input type="tel" formControlName="emiamount_new" [disabled]="disableScope" clearInput></ion-input>
+        </ion-item>
+
+        <div class="errbox">
+          <span class="error"
+            *ngIf="emiModal.get('emiamount_new').hasError('required') && (emiModal.get('emiamount_new').touched || emiModal.get('emiamount_new').dirty)">
+            <span class="errText">Enter Amount</span>
+          </span>
+          <span class="error"
+            *ngIf="emiModal.get('emiamount_new').hasError('pattern') && (emiModal.get('emiamount_new').touched || emiModal.get('emiamount_new').dirty)">
+            <span class="errText">Enter Valid Amount</span>
+          </span>
+        </div>
+
+        <ion-item class="newdate" no-lines>
+          <ion-label position="floating" id="moreinfo-labels">Choose Start Date</ion-label>
+          <!-- <ion-input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="moreinfo-date" id="my-input"  formControlName="startdate" min="2010-01-01" [max]="getToday2()" displayFormat="DD/MM/YYYY"
+               value="01/01/2019"></ion-input> -->
+
+          <ion-input type="date" placeholder="Choose a date" formControlName="startdate" min="01/01/1900"
+            [max]="getToday()" displayFormat="DD/MM/YYYY" [disabled]="disableScope"></ion-input>
+        </ion-item>
+        <div class="errbox">
+          <span
+            *ngIf="emiModal.get('startdate').hasError('required') && (emiModal.get('startdate').touched || emiModal.get('startdate').dirty)">
+            <span class="errText">Select EMI Start Date.</span>
+          </span>
+        </div>
+
+        <ion-item class="newdate" no-lines>
+          <ion-label position="floating" id="moreinfo-labels">Choose End Date</ion-label>
+          <!-- <ion-input type="text" onfocus="(this.type='date')" class="moreinfo-date" onblur="(this.type='text')" formControlName="enddate"[min]="getToday2()" max="2040-01-01" displayFormat="DD/MM/YYYY"
+                       value="01/01/2020"></ion-input> -->
+
+          <ion-input type="date" placeholder="Choose a date" formControlName="enddate" max="20/12/2060"
+            [min]="getToday()" displayFormat="DD/MM/YYYY" [disabled]="disableScope"></ion-input>
+        </ion-item>
+        <div class="errbox">
+          <span
+            *ngIf="emiModal.get('enddate').hasError('required') && (emiModal.get('enddate').touched || emiModal.get('enddate').dirty)">
+            <span class="errText">Select EMI End Date.</span>
+          </span>
+        </div>
+
+        <div class="submit_button">
+          <ion-button *ngIf="disableScope" type="button" class="edit_button" color="orangepart" round
+            (click)="disableScope_edit()">Edit</ion-button>
+          <ion-button *ngIf="showSave" class="edit_button" type="submit" color="orangepart"
+            [disabled]="emiModal.invalid" round (click)="savevalue(emiModal.value)">Save</ion-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

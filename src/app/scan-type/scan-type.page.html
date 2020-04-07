@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="headpart" hideBackButton="true">
+    <!-- <ion-button menuToggle style="--background:transparent;">
+      <ion-icon slot="icon-only" color="white" name="menu"></ion-icon>
+    </ion-button> -->
+
+    <ion-buttons slot="start"  style="position: absolute;">
+      <ion-menu-button color="white" style="zoom:1.2;"></ion-menu-button>
+  </ion-buttons>
+
+
+    <ion-title style="color:white;" text-center>EIDA
+      <!--  <span (click)="serachClick()">
+         <ion-icon name="search" style="float:right;"></ion-icon>
+        </span>-->
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content padding>
+  <div class="content">
+
+    <div class="leadalign">
+      <div class="leadtype">
+        <h5 class="heder_label">Please scan your EIDA card</h5>
+      </div>
+      <ion-row>
+        <ion-col col-6>
+          <ion-card class="newcard" (click)="openScanScreen('OCR')">
+            <img src="assets/imgs/ocr.png">
+            <p class="newtitle">OCR & EIDA Interface</p>
+          </ion-card>
+        </ion-col>
+        <ion-col col-6>
+          <ion-card class="newcard">
+            <img src="assets/imgs/nfc.png" (click)="openScanScreen('NFC')">
+            <p class="newtitle">NFC Reader</p>
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </div>
+
+    <!-- <div class="fullheight">
+    <div class="centerContent">
+      <form [formGroup]="cifDataForm" (ngSubmit)="cifData(cifDataForm.value)">
+        <ion-row>
+          <ion-col col-10 align-self-center>
+            <ion-item>
+              <ion-input type="tel"  placeholder="Enter CIF ID" maxlength="10" formControlName="cifId"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-2 align-self-center>
+            <button ion-button type="submit" [disabled]="!cifDataForm.valid" class="navIcon">
+              <ion-icon name="md-arrow-forward"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </form>
+    </div>
+  </div> -->
+
+  </div>
+</ion-content>

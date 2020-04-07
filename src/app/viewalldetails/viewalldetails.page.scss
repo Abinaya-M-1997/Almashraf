@@ -1,0 +1,185 @@
+.applProdcut{
+    font-size: 16px;
+    color: #FFFFFF;
+}
+.applLoanAmount{
+    font-size: 16px;
+    color: #FFFFFF;
+    text-align: right;
+}
+.viewimg{
+    border-radius: 50% !important;
+    text-align: center;
+    margin: 0px auto 0px auto;
+    width: 150px;
+    height: 150px;
+}
+.applcoappl{
+margin-bottom: 30px !important;
+}
+.applcoappl .appcard{
+    width: 100% !important;
+    margin-left:0 !important; 
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+}
+.fullWidth{
+    margin-left:0 !important;
+    width:100% !important;
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+}
+.viewAllDetails{
+width: 100%;
+padding: 10px;
+background-color: #2e89ea;
+margin: 0px 0px 20px 0px;
+}
+.viewName{
+    text-align: center;
+    margin: 0px auto 10px auto;
+}
+.applFullName{
+    font-weight: bold;
+    font-size: 20px;
+    color: #FFFFFF;
+    margin: 0px 0px 10px 0px;
+    text-align: center;
+}
+  .cardTitles{
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0px 0px 0px 0px;
+    padding: 10px 0px 7px 0px;
+    text-align: center;
+}
+.cardTitles1{
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 0px 7px 0px;
+    text-align: center;
+}
+
+    .expand-wrapper {
+    transition:0.5s;
+    -webkit-transition: 0.5s linear;
+}
+
+.CoApplDetails{
+    width: 100% !important;
+    margin: 0px 0px 0px 0px !important;
+    padding: 0px 0px 0px 0px !important;
+}
+/*****************/
+    .segment-md .segment-button {
+    border:none !important;
+}
+
+.toolbar .segment-md {
+    height: 52px !important;
+}
+.segment-md .segment-button ion-icon {
+    font-size: 2.6rem;
+    line-height: 4rem;
+    color: #ffffff;
+}
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+    opacity: 1;
+    border-color: #ffffff;
+}
+
+.segment ion-toolbar{
+    padding: 0 !important;
+    min-height: auto !important;
+    border-bottom: 3px solid #FF5733;
+    }
+
+    .segment .segment-md .segment-button.segment-activated{
+    border: 0px;
+    background-color: #FF5733;
+    height:52px;
+    }
+
+.viewsegment{
+position: fixed;
+bottom: 0;
+left: 0;
+right: 0;
+z-index: 1000;
+}
+.viewsegtext{
+color: #FFFFFF;
+}
+
+.margt{
+min-height: 20px !important;
+max-height: 45px !important;
+}
+.retrieveFont{
+font-family: "Roboto", "Helvetica Neue", sans-serif !important;
+font-size: 1.4rem !important;  
+padding-bottom: 1%;  
+}
+.ImageTitles{
+font-family: "Roboto", "Helvetica Neue", sans-serif !important;
+font-size: 16px;
+clear: both;
+color: #FFFFFF;
+background-color: #2e89ea;
+margin: 0px auto;
+text-align: center;
+padding: 6px 0px;
+margin: 0px 0px 0px 0px;
+}
+.top20{
+margin-top: 20px !important;
+}
+.iconImg{
+width: 100%;
+
+}
+.iconImg img{
+width: 31%;
+height: 31%;
+float: left;
+margin: 5px 7px 5px 0px;
+border-radius: 3px;
+}
+
+.label-md, .item-md.item-block .item-inner{
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+.list-md {
+    margin: -1px 0 0px;
+}
+.margbot{
+margin-bottom: 30px !important;
+}
+#container {
+    position: relative;
+    height: 9em;
+    width: 99%;
+    margin: 2px auto;
+    background: #abefcd;
+    text-align: left;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    vertical-align:middle;
+  }
+  #container div {
+    display: inline-block;
+    width: 14em;
+    height: 6em;
+    margin: 0.5em;
+    border: 1px solid blue;
+    padding: 3px;
+    white-space: normal;
+    text-align: center;
+  }
+// .hscroll{
+//     overflow-x: auto;
+//     white-space: nowrap;
+// }

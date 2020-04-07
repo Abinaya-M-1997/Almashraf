@@ -1,0 +1,96 @@
+<ion-app>
+    <ion-menu contentId="content" side="start" (ionOpen)="menuOpened()" *ngIf="side_menu">
+      <ion-header>
+          <ion-toolbar color="headpart">
+              <ion-title class="profiletitle">User Profile </ion-title>
+            </ion-toolbar>
+      </ion-header>
+      <ion-content>
+          <div style="background-color:#313679;padding-bottom:10px;box-shadow: 0 2px 2px 2px #333;">
+
+
+              <div class="userdet">
+        
+                <ion-avatar style="margin-left:30%;width:120px;height:120px;padding-top:10px;">
+                  <img src="assets/imgs/userpro.png" width="120" height="120">
+                </ion-avatar>
+        
+                <h2 style="line-height:0;color:#ffffff;">{{fname}}</h2>
+                <div style="padding-top:3%;color:white;" class="timedet">
+                  {{myDate | date: 'short'}}
+                </div>
+              </div>
+            </div>
+
+            <ion-list style="margin-top:15px;">
+              <ion-menu-toggle>
+                  <ion-item (click)="homePage()">
+                      <ion-icon name="home" color="orange_clr" ></ion-icon>
+                      <ion-label class="ionlabel">Home Page</ion-label>
+                  </ion-item>
+              </ion-menu-toggle>
+              
+              <ion-menu-toggle>
+                  <ion-item (click)="newAppl()">
+                      <ion-icon name="person" color="orange_clr" ></ion-icon>
+                      <ion-label class="ionlabel">New Applicant</ion-label>
+                  </ion-item>
+              </ion-menu-toggle>
+
+              <ion-menu-toggle>
+                  <ion-item (click)="getmaster()">
+                      <ion-icon name="information-circle" color="orange_clr" ></ion-icon>
+                      <ion-label class="ionlabel"> Get Master Update</ion-label>
+                  </ion-item>
+              </ion-menu-toggle>
+
+
+             
+
+            
+                <!-- <ion-button menuClose ion-item no-lines (click)="homePage()">
+                      <h2 class="pageTitle">
+                          <ion-icon name="home" style="float:left"></ion-icon>
+                          <span> Home Page</span>
+                          <hr/>
+                      </h2>
+                  </ion-button>
+                <ion-button menuClose ion-item no-lines (click)="newAppl()">
+                      <h2 class="pageTitle">
+                          <ion-icon name="person" style="float:left"></ion-icon>
+                          <span> New Applicant</span>
+                          <hr/>
+                      </h2>
+                  </ion-button>
+                 <ion-button menuClose ion-item no-lines (click)="getmaster()">
+                      <h2 class="pageTitle">
+                          <ion-icon name="information-circle" style="float:left"></ion-icon>
+                          <span> Get Master Update</span>
+                          <hr/>
+                      </h2>
+                  </ion-button> -->
+                   <!-- <button menuClose ion-item no-lines (click)="showApprovalpage()">
+                      <h2 class="pageTitle">
+                          <ion-icon name="information-circle" style="float:left"></ion-icon>
+                          <span> Approval Module</span>
+                          <hr/>
+                      </h2>
+                  </button> -->
+              </ion-list>
+          
+          
+            </ion-content>
+          
+            <ion-footer style="box-shadow: 0 5px 5px 5px #333;">
+              <ion-toolbar (click)="logout()" color="headpart">
+                <ion-menu-toggle>
+                    <ion-title class="profiletitle">Logout
+                        <ion-icon name="log-out" style="float:right;"></ion-icon>
+                      </ion-title>
+                </ion-menu-toggle>
+              </ion-toolbar>
+            </ion-footer>
+    
+    </ion-menu>
+    <ion-router-outlet id="content" main></ion-router-outlet>
+  </ion-app>

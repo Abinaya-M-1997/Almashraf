@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-toolbar color="headpart">
+
+    <ion-buttons slot="start">
+      <ion-menu-button color="white" autoHide="true"></ion-menu-button>
+    </ion-buttons>
+
+    <!-- <ion-button menuToggle style="--background:transparent;">
+      <ion-icon slot="icon-only" color="white" name="menu"></ion-icon>
+    </ion-button> -->
+    <ion-title class="ion-title" style="margin-top: -1px;">Application Processing
+      <span (click)="serachClick()">
+        <ion-icon name="search" style="float:right;"></ion-icon>
+      </span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--hidefab-->
+  <ion-searchbar *ngIf="hide" class="mySerch" (ionInput)="filterItems($event)"></ion-searchbar>
+
+
+  <div *ngIf="!nouserdata" class="existPlaceholder">
+    <h2>To add New <br />
+      <ion-icon ios="ios-person-add" md="md-person-add"></ion-icon> Applicant, tap
+      <ion-icon name="add"></ion-icon> button <br /> at the bottom
+    </h2>
+  </div>
+
+  <div *ngIf="nosearchdata">
+    <div *ngIf="!users.length" class="existPlaceholder1">
+      <h2>No results found.</h2>
+    </div>
+  </div>
+
+  <ion-list class="listbox" detail-none no-lines ion-item *ngFor="let user of users;let i=index">
+    <ion-card *ngIf="nouserdata">
+      <ion-item-sliding class="slidingion" #slidingItem>
+        <ion-item>
+          <ion-row style="width:100%;margin:0px;">
+            <ion-col size="4">
+
+              <ion-avatar style="padding:0 !important;" item-start>
+                <img *ngIf="user.imagepath" [src]="user.imagepath" class="imageround">
+                <!-- <img *ngIf="!user.imagepath"[src]="user.imagepath" (click)="presentContactModal(user.imagepath)" class="imageround"> -->
+                <img (click)="viewAllDetails(user)" src="../../assets/imgs/view.png" class="imageround drawerimg">
+              </ion-avatar>
+
+            </ion-col>
+
+
+            <ion-col size="6" class="colcenter" (click)="viewpage(user)">
+              <h3 class="ion-text-capitalize">{{user.firstName}}</h3>
+              <p>
+                <ion-icon name="cart"></ion-icon> {{user.product}}
+              </p>
+              <p *ngIf="user.app_submit_status=='Y'">
+                <ion-icon name="thumbs-up" class="subs"></ion-icon> Submitted
+              </p>
+              <p *ngIf="user.app_submit_status!='Y'">
+                <ion-icon name="thumbs-down" color="danger" class="subs"></ion-icon> Not Submitted
+              </p>
+              <p>
+                <!-- <ion-icon>₹</ion-icon> -->{{user.amount | currency:'د.إ'}}</p>
+              <p *ngIf="user.app_submit_status=='Y'" style="font-size: 13px;">Application No:
+                {{user.app_reference_number}}</p>
+
+            </ion-col>
+            <ion-col size="2" (click)="viewpage(user)">
+              <img src="assets/imgs/rarrow.png" class="arrowimg">
+            </ion-col>
+          </ion-row>
+        </ion-item>
+
+
+        <!-- <ion-item *ngIf="hideapplicant">
+          <h2>Applicant details</h2>
+        </ion-item> -->
+
+        <!-- <ion-item-options side="left">
+        <! <button ion-button (click)="favorite(item)">Favorite</button> -->
+        <!-- <button ion-button (click)="coapp()" color="success"><ion-icon name="contacts"></ion-icon>Co-App</button>
+      </ion-item-options> -->
+
+        <ion-item-options>
+          <ion-item-option color="danger" (click)="removeUser(user)">
+            <!-- <button ion-button (click)="favorite(item)">Favorite</button> -->
+
+            <ion-icon name="trash" (click)="removeUser(user)"></ion-icon>Delete
+
+          </ion-item-option>
+        </ion-item-options>
+
+      </ion-item-sliding>
+    </ion-card>
+
+  </ion-list>
+  <!-- <ion-searchbar *ngIf="hide" class="mySerch"
+        [(ngModel)]="myInput"
+        [showCancelButton]="shouldShowCancel"
+        (ionInput)="getNames($event)"
+        (ionCancel)="onCancel($event)">
+      </ion-searchbar> -->
+  <!-- <ion-card *ngFor="let user of userInfo">
+        <ion-row>
+          <ion-col col-3>
+
+              <ion-avatar item-start (click)="presentContactModal(user.img)">
+                <img src="{{user.img}}" >
+              </ion-avatar>
+
+          </ion-col>
+          <ion-col  (click)="viewpage(user)">
+            <ion-row>
+              <ion-col>
+                <h2><b>{{user.name}}</b></h2>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-row *ngIf="user.status">
+                  <ion-col>Online</ion-col>
+                  <ion-col>
+                    <img src="assets/imgs/online.png" class="nets">
+                  </ion-col>
+                </ion-row>
+                <ion-row  *ngIf="!user.status">
+                    <ion-col>Offline</ion-col>
+                    <ion-col>
+                      <img src="assets/imgs/offline.png" class="nets">
+                    </ion-col>
+                  </ion-row>
+                <ion-row>
+                  <ion-col>Submitted</ion-col>
+                  <ion-col *ngIf="user.submitstatus">
+                    <ion-icon name="thumbs-up" class="subs"></ion-icon>
+                  </ion-col>
+                  <ion-col *ngIf="!user.submitstatus">
+                      <ion-icon name="thumbs-down" class="subd"></ion-icon>
+                    </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col>
+                <div>
+                  <h3>{{user.mobile}}
+                    <ion-icon name="call" class="calls"></ion-icon>
+                  </h3>
+                </div>
+                <div class="loan" *ngIf="user.loantype==='Home Loan'">
+                  <h3>{{user.loantype}}
+
+                    <ion-icon name="home" class="calls"></ion-icon>
+                  </h3>
+                </div>
+                <div class="loan"  *ngIf="user.loantype==='Vechile Loan'">
+                    <h3>{{user.loantype}}
+
+                      <ion-icon name="car" class="calls"></ion-icon>
+                    </h3>
+                  </div>
+
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-card> -->
+
+
+  <ion-fab class="ionfabicons" vertical="bottom" horizontal="end" (click)="userpage()">
+    <ion-fab-button style="--ripple-color: white;" color="orangepart">
+      <ion-icon color="light" name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-button (click)="onClick()">
+    block
+  </ion-button>
+
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content></ion-refresher-content>
+        </ion-refresher> -->
+  <div *ngFor="let i of img">
+    <img src={{webView.convertFileSrc(i.proofimgpath)}} width=50 height=50>
+  </div>
+</ion-content>

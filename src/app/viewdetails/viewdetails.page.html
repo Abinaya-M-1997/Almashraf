@@ -1,0 +1,198 @@
+<ion-header>
+
+  <ion-toolbar color="headpart">
+    <ion-icon name="arrow-back" color="white" (click)="gohome()" style="font-size:20px; margin-left:10px;"></ion-icon>
+    <ion-title class="ion-text-center">
+      <ion-row>
+        <ion-col class="ion-text-end" size="5">
+          <ion-icon name="contact" size="large" color="white"></ion-icon>
+        </ion-col>
+        <ion-col class="ion-text-start">
+          <p style="margin:0px;margin-top:5px;color:white;">Applicant User</p>
+        </ion-col>
+      </ion-row>
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-card style="margin-top:2%;" class="headpart">
+    <ion-row style="padding-top:2%;padding-bottom: 2%;" (click)="passdetails(userinfo)">
+      <ion-col size="5">
+        <ion-avatar style="margin-left:10%;padding-right:0;width:110px;height:auto;" *ngIf="userinfo.imagepath">
+          <img [src]="userinfo.imagepath" width="120" height="120" />
+        </ion-avatar>
+        <!-- <ion-avatar style="margin-left:10%;padding-right:0;" >
+          <img src="assets/imgs/profile.png" class="viewimg" width="120" height="120" />
+        </ion-avatar> -->
+      </ion-col>
+
+      <ion-col size="6" style="padding-left:0px;">
+        <div style="margin-left:4%;text-transform:capitalize;" id="profiletext">
+          <h2>{{userinfo.firstName}}<span *ngIf="userinfo?.filled === 'F'">
+              <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="subs"></ion-icon>
+            </span></h2>
+
+          <div id="subtext">
+
+            <p>
+              <ion-icon name="cart"></ion-icon> {{userinfo.product}}
+            </p>
+            <p *ngIf="userinfo.app_submit_status == 'Y'">
+              <ion-icon name="thumbs-up" class="subs"></ion-icon> Submitted
+            </p>
+            <p>
+              <p *ngIf="userinfo.app_submit_status != 'Y'">
+                <ion-icon name="thumbs-down" color="danger" class="subs"></ion-icon> Not Submitted
+              </p>
+              <p>
+                <!-- <ion-icon>₹</ion-icon> -->{{userinfo.amount | currency:'د.إ'}}</p>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="1">
+        <img src="assets/imgs/rarrow.png" style="width:20px !important; height: 80px !important;margin-top:15px;">
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <div style="width:100%;">
+
+    <ion-segment [(ngModel)]="viewdetail" style="width:100%;">
+      <ion-segment-button value="coapplicant" (click)="selectCoApplicant()">
+        <ion-icon name="person" color="light"> </ion-icon>
+        <ion-label color="light">Co-Applicant</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="guarantor" (click)="selectQuarantor()">
+        <ion-icon name="thumbs-up" color="light"></ion-icon>
+        <ion-label color="light">Guarantor</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+
+
+
+  </div>
+</ion-header>
+
+<ion-content>
+
+  <div [ngSwitch]="viewdetail">
+    <div *ngSwitchCase="'coapplicant'">
+      <ion-list class="swipeView" *ngFor="let user of users;let i=index">
+        <ion-card>
+          <ion-item-sliding class="slidingion" #coApplSwipe>
+            <ion-item lines="none" class="coApplSwipe">
+
+              <ion-row style="width:100%;">
+                <ion-col size="4">
+                  <ion-avatar item-start style="margin-top:5px;">
+                    <img [src]="user.imagepath">
+                  </ion-avatar>
+                </ion-col>
+                <ion-col size="7" (click)="coappdetails(user)">
+                  <h4 style="margin:0;margin-bottom:3px;text-transform: capitalize;"><b>{{user.firstName}}</b> <span
+                      *ngIf="user?.filled === 'F'">
+                      <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="subs"></ion-icon>
+                    </span></h4>
+
+                  <!-- <div class="navIcon">
+                    <h3>
+                      <ion-icon name="people" class="calls"></ion-icon> {{user.gender}}
+                    </h3>
+                  </div> -->
+                  <!-- <div class="loan">
+                    <h3>
+                      <ion-icon name="pin" class="calls"></ion-icon> {{user.stateName}}
+                    </h3>
+                  </div> -->
+                  <div>
+                    <p style="margin:0px;">
+                      <ion-icon name="call"></ion-icon> &nbsp;<span style="color:#999;font-size:10px;">
+                        {{user.phone}}</span>
+                    </p>
+                    <p style="margin:0px;">
+                      <ion-icon name="mail"></ion-icon> &nbsp; <span
+                        style="color:#999;font-size:10px;">{{user.email}}</span>
+                    </p>
+                  </div>
+                </ion-col>
+                <ion-col size="1" align-self-center>
+                  <img src="assets/imgs/rarrow.png" style="width:20px !important; height: 80px !important;float:right">
+                </ion-col>
+              </ion-row>
+
+            </ion-item>
+            <ion-item-options>
+              <ion-item-option color="danger" (click)="removeCoUser(user)">
+                <ion-icon name="trash"></ion-icon>Delete
+              </ion-item-option>
+
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card>
+      </ion-list>
+    </div>
+
+    <div *ngSwitchCase="'guarantor'">
+
+      <ion-list class="swipeView" *ngFor="let gurantor of gurantors;let i=index">
+        <ion-card>
+          <ion-item-sliding class="slidingion" #coApplSwipe>
+
+            <ion-item lines="none" class="coApplSwipe">
+              <ion-row style="width:100%;">
+                <ion-col size="4" style="margin-top:11px;">
+                  <ion-avatar>
+                    <img [src]="gurantor.imagepath">
+                  </ion-avatar>
+                </ion-col>
+                <ion-col size="7" (click)="gurantordetails(gurantor)">
+                  <h4 style="margin-top:0px;margin-bottom:3px;text-transform: capitalize;">{{gurantor.firstName}}<span
+                      *ngIf="gurantor?.filled === 'F'">
+                      <ion-icon ios="ios-checkmark-circle" md="md-checkmark-circle" class="subs"></ion-icon>
+                    </span></h4>
+
+                  <div>
+                    <p style="margin:0px;">
+                      <ion-icon name="call"></ion-icon> &nbsp; <span style="color:#999;font-size:10px;">
+                        {{gurantor.phone}} </span>
+                    </p>
+                    <p style="margin:0px;">
+                      <ion-icon name="mail"></ion-icon> &nbsp; <span
+                        style="color:#999;font-size:10px;">{{gurantor.email}}</span>
+                    </p>
+                  </div>
+
+                </ion-col>
+                <ion-col size="1" align-self-center>
+                  <img src="assets/imgs/rarrow.png" style="width:20px !important; height: 80px !important;float:right">
+                </ion-col>
+              </ion-row>
+            </ion-item>
+
+
+            <ion-item-options>
+              <ion-item-option color="danger" (click)="removeGuaUser(gurantor)">
+                <ion-icon name="trash"></ion-icon>Delete
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-card>
+      </ion-list>
+    </div>
+  </div>
+
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="userpage()">
+    <ion-fab-button color="orange_clr">
+      <ion-icon ios="ios-add" md="md-add" color="white"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<ion-footer>
+  <!-- <ion-button color="danger" (click)="finalPage()">Submit</ion-button> -->
+  <ion-toolbar color="headpart" (click)="submitpage()">
+    <ion-title color="white">Proceed</ion-title>
+  </ion-toolbar>
+</ion-footer>

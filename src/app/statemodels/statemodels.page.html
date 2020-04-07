@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-item color="headpart" class="ion-text-center">
+    <ion-row>
+      <ion-col col-11>
+         Select State
+      </ion-col>
+      <ion-col col-1><ion-icon name="close" style="font-size: 22px;font-weight: bold;" (click)="closeStateModel()"></ion-icon></ion-col>
+  </ion-row> 
+    <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
+  </ion-item>
+
+
+
+</ion-header>
+<ion-content>
+  <ion-list>
+
+    <ion-item *ngFor="let state of stateInfo" (click)="selectState(state)">
+      {{state.sgmStateName}}
+    </ion-item>
+  </ion-list>
+
+</ion-content>
