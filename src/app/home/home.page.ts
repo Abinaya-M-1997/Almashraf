@@ -5,7 +5,7 @@ import { Camera, PictureSourceType } from '@ionic-native/camera/ngx';
 import { Component, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
 import {
   NavController,
-  Events,
+  // Events,
   ModalController,
   LoadingController,
   IonItemSliding,
@@ -53,7 +53,7 @@ export class HomePage {
   constructor(
     public sqliteProvider: SqlliteProvider,
     public navCtrl: NavController,
-    public events: Events,
+    // public events: Events,
     public modalCtrl: ModalController,
     public platform: Platform,
     public alertCtrl: AlertController,
@@ -91,7 +91,7 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.events.publish('left-menu', true);
+    // this.events.publish('left-menu', true);
   }
 
   // ngOnInit() {

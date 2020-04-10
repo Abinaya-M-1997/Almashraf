@@ -1,6 +1,6 @@
 import { Component, NgZone, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 
-import { Platform, Events, NavController } from '@ionic/angular';
+import { Platform,  NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -27,13 +27,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public zone: NgZone,
-    public events: Events,
+    // public events: Events,
     public router: Router
   ) {
     this.initializeApp();
-    this.events.subscribe('left-menu', data => {
+   /*  this.events.subscribe('left-menu', data => {
       this.side_menu = data;
-    });
+    }); */
   }
 
   ngOnInit() {

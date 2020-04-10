@@ -7,8 +7,8 @@ import { ConditionalExpr } from '@angular/compiler';
 
 import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
 import { File } from '@ionic-native/file/ngx';
-import * as pdfmake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+// import * as pdfmake from 'pdfmake/build/pdfmake';
+// import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 
 var PDFrefId;
 
@@ -382,7 +382,7 @@ createPDF(value){
     
       let self = this;
       
-      pdfmake.vfs = pdfFonts.pdfMake.vfs;
+      // pdfmake.vfs = pdfFonts.pdfMake.vfs;
       var docDefinition = {
     //    content: [
       //  {
@@ -424,11 +424,11 @@ createPDF(value){
   
       } // end of doc definition 
   
-      pdfmake.createPdf(docDefinition).getBuffer(function (buffer) {
+    /*   pdfmake.createPdf(docDefinition).getBuffer(function (buffer) {
         let utf8 = new Uint8Array(buffer);
         let binaryArray = utf8.buffer;
         self.saveToDevice(binaryArray,PDFrefId+".pdf")
-        });
+        }); */
     }
     generateTextObj(value){
       let objBuilderArray = [];

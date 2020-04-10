@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   NavController,
   NavParams,
-  Events,
+  // Events,
   MenuController,
   Platform,
   AlertController
@@ -31,7 +31,7 @@ export class ViewdetailsPage implements OnInit {
 
   constructor(
     public platform: Platform,
-    public events: Events,
+    // public events: Events,
     public menuCtrl: MenuController,
     public sqliteProvider: SqlliteProvider,
     public alertCtrl: AlertController,
@@ -45,7 +45,12 @@ export class ViewdetailsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.events.publish('left-menu', true);
+
+
+    // const eventDat:EventInit;
+
+    window.dispatchEvent(new Event('left-menu'))
+    // this.events.publish('left-menu', true);
     //this.events.publish('pageEvent', { refId: this.userinfo.refId });
     // this.userinfo = this.route.snapshot.params;
     console.log(this.userinfo, 'value in view page');
@@ -313,7 +318,7 @@ export class ViewdetailsPage implements OnInit {
           text: 'YES',
           role: 'destructive',
           handler: () => {
-            this.events.publish('pageEvent', { refId: this.userinfo.refId, id:this.userinfo.id});
+            // this.events.publish('pageEvent', { refId: this.userinfo.refId, id:this.userinfo.id});
           }
         },
         {

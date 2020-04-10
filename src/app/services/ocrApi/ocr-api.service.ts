@@ -1,7 +1,7 @@
 import { async } from '@angular/core/testing';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Injectable } from '@angular/core';
-import { ActionSheetController, AlertController, Events, LoadingController } from '@ionic/angular';
+import { ActionSheetController, AlertController,  LoadingController } from '@ionic/angular';
 import { OCR, OCRSourceType, OCRResult } from '@ionic-native/ocr/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import { Camera, PictureSourceType } from '@ionic-native/camera/ngx';
@@ -21,7 +21,7 @@ export class OcrAPIService {
   constructor(public camera: Camera,
     public actionSheetCtrl: ActionSheetController,
     public ocr: OCR,
-    public events: Events,
+    // public events: Events,
     public filePath: FilePath,
     public file: File,
     public alertController: AlertController,
@@ -126,7 +126,7 @@ export class OcrAPIService {
       //PAN Num:
       let pan_no = pan_str.match(/[A-Z]{5}[0-9]{4}[A-Z]{1}/);
       this.alertcont("", "PAN Card Scanned Successfully");
-      this.events.publish('panno', pan_no, this.selectedImage);
+      // this.events.publish('panno', pan_no, this.selectedImage);
 
     }
     else {
@@ -145,7 +145,7 @@ export class OcrAPIService {
       var aa_rep_str = aadhar_string.replace(/\s/g, '');
       let aa_num = aa_rep_str.match(/[0-9]{4}[0-9]{4}[0-9]{4}/);
       this.alertcont("", "Aadhar Card Scanned Successfully");
-      this.events.publish('aa_no', aa_num, this.selectedImage);
+      // this.events.publish('aa_no', aa_num, this.selectedImage);
     }
 
     else {
@@ -174,7 +174,7 @@ export class OcrAPIService {
 
       this.alertcont("", "Driving License Scanned Successfully");
 
-      this.events.publish('dl_number', dl_no1, dl_no2, this.selectedImage);
+      // this.events.publish('dl_number', dl_no1, dl_no2, this.selectedImage);
     }
 
     else {
@@ -194,7 +194,7 @@ export class OcrAPIService {
 
       this.alertcont("", "Voter Id Scanned Successfully");
 
-      this.events.publish('voter number', voter_id, this.selectedImage);
+      // this.events.publish('voter number', voter_id, this.selectedImage);
     }
     else {
       this.alertcont("Didn't Scan Voter Id ", "Kindly choose your Document Correctly.");

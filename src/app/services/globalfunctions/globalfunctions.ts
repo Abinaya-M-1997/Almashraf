@@ -321,6 +321,16 @@ export class GlobalfunctionsProvider {
   errorCallback(error) {
     console.log(error);
   }
+
+  async showAlert(tittle, subtitle) {
+    let alert = await this.alertCtrl.create({
+      header: tittle,
+      subHeader: subtitle,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+/*
   showAlert(tittle, subtitle): Promise<any> {
     return new Promise(async (resolve, reject) => {
       let alert = await this.alertCtrl.create({
@@ -338,7 +348,7 @@ export class GlobalfunctionsProvider {
       });
       await alert.present();
     });
-  }
+  }*/
   /*    secureapp(){
     window.plugins.preventscreenshot.enable(this.successCallback, this.errorCallback);
       // window.plugins.preventscreenshot.disable(this.successCallback, this.errorCallback);

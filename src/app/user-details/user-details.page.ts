@@ -1,6 +1,6 @@
 import { async } from '@angular/core/testing';
 import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
-import { AlertController, IonicModule, NavController, IonSlides, LoadingController, ActionSheetController, ModalController, Platform, IonContent, Events } from '@ionic/angular';
+import { AlertController, IonicModule, NavController, IonSlides, LoadingController, ActionSheetController, ModalController, Platform, IonContent } from '@ionic/angular';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { SqlliteProvider } from '../services/sqllite/sqllite';
@@ -15,8 +15,8 @@ import { Network } from '@ionic-native/network/ngx';
 
 import { IonApp } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/operator/map';
 
 import { PanModalPage } from '../pan-modal/pan-modal.page';
 import { AadharModalPage } from '../aadhar-modal/aadhar-modal.page';
@@ -427,16 +427,16 @@ export class UserDetailsPage implements OnInit {
     public network: Network,
     public file: File,
     public webview: WebView,
-    public events: Events,
+    // public events: Events,
     public ocrApi: OcrAPIService
   ) {
-    this.events.subscribe('pageEvent', data => {
+  /*  this.events.subscribe('pageEvent', data => {
 
       console.log(data.refId, data.id);
 
       this.finalsubmit(data.refId, data.id);
 
-    });
+    });*/
 
     this.addressswitch === 'caddress';
     this.status = 'No';
@@ -4522,7 +4522,7 @@ export class UserDetailsPage implements OnInit {
 
   leftMenu() {
     console.log('object');
-    this.events.publish('left-menu', true);
+    // this.events.publish('left-menu', true);
   }
 
   getCreditvalue() {
@@ -4539,7 +4539,7 @@ export class UserDetailsPage implements OnInit {
 
     await this.ocrApi.selectSource(this.addProof.get('kycDesc').value);
 
-    this.events.subscribe('panno', (pan_no, imgData) => {
+  /*  this.events.subscribe('panno', (pan_no, imgData) => {
       console.log(imgData, 'event call');
       // var d = new Date().getTime();
       // let kycimg = this.webview.convertFileSrc(imgData);
@@ -4552,8 +4552,8 @@ export class UserDetailsPage implements OnInit {
         this.addProof.get('kycNum').setValue(pan_no);
       })
     });
-
-    this.events.subscribe('aa_no', (aa_num, imgData) => {
+*/
+ /*   this.events.subscribe('aa_no', (aa_num, imgData) => {
       console.log("TCL: ocr_scan -> imgData", imgData)
       this.kycImgdata = this.webview.convertFileSrc(imgData);
       this.addProof.get('kycNum').setValue(aa_num);
@@ -4575,7 +4575,7 @@ export class UserDetailsPage implements OnInit {
       else {
         this.addProof.get('kycNum').setValue(dl_no2);
       }
-    })
+    })*/
   }
 
   proofChange($event) {

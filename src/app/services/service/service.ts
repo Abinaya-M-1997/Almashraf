@@ -2,8 +2,8 @@
 // import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map';
+// import { Observable } from 'rxjs';
+// import 'rxjs/add/operator/map';
 import { HTTP } from '@ionic-native/http/ngx';
 import { GlobalfunctionsProvider } from '../globalfunctions/globalfunctions';
 declare var require: any;
